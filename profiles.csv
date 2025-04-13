@@ -76,16 +76,16 @@ id,name,bio,location,photo,followers
 74,Kimberly (Donna) Davis,Marketing Department Research Manager,United States,Yes,6
 75,Kathryn Melendez,Estee lauder - Marketing Research Manager,"Los Angeles, California, United States",Yes,10
 76,Leia Lin,Marketing director-Estee lauder,"Washington, District of Columbia, United States",Yes,14
-77,Emma Lee,--Marketing Department Research Manager,"Miami, Florida, United States",Yes,40
+77,Emma Lee,#NAME?,"Miami, Florida, United States",Yes,40
 78,Josie (Jenny),Marketing Department Research Manager,United States,Yes,26
 79,Amelia Raya,Marketing Research manager,United States,Yes,45
 80,Ariella💜💜 ( Jenny ),Director of Human Resources,United States,Yes,4
 81,Josie ( Jenny )💖💖💖💖,Director of Human Resources,United States,Yes,5
 82,Sarah ( Jenny )💖💖💖💖,Director of Human Resources,United States,Yes,25
-83,Grace ML 🍇🍇🙆‍♀️,-- The manager at Origins,"Toronto, Ontario, Canada",Yes,14
-84,Grace M 🍓🍓🙆‍♀️,--The Manager at Origins,"Toronto, Ontario, Canada",Yes,22
+83,Grace ML 🍇🍇🙆‍♀️,#NAME?,"Toronto, Ontario, Canada",Yes,14
+84,Grace M 🍓🍓🙆‍♀️,#NAME?,"Toronto, Ontario, Canada",Yes,22
 85,Kelly Ayotte,Estee Lauder Marketing Department Research Manager,United States,Yes,38
-86,Qing Su,--Marketing research manager,"New York, New York, United States",Yes,27
+86,Qing Su,#NAME?,"New York, New York, United States",Yes,27
 87,jack jones,tester at Bank of Alameda,"Beverly Hills, California, United States",No,0
 88,Amelia Raya,Marketing Research manager,United States,Yes,45
 89,Leia Li,Marketing director-  Estee lauder,"Greater Toronto Area, Canada",Yes,2
@@ -150,8 +150,8 @@ id,name,bio,location,photo,followers
 148,Bree Liu,"Sales Manager for Exporting Businesses  BTB&BTC to the USA, Canada,Europe, and south America of SIC ceramic membranes",China,Yes,146
 149,Anna Ahmed,--,"Dallas, Texas, United States",Yes,0
 150,Neha Tiwari,Assistant Manager HR Operations at Utkarsh small Finance Bank || HR Recruiter || Talent Acquisition || HR Operations || HR Specialist || HR Generalist ||,"Varanasi, Uttar Pradesh, India",Yes,822
-151,Lily Fuller,--chief marketing officer,"Arvada, Colorado, United States",Yes,2
-152,Mason Wilson,--Market Development Director,"Woodbridge, Virginia, United States",Yes,1
+151,Lily Fuller,#NAME?,"Arvada, Colorado, United States",Yes,2
+152,Mason Wilson,#NAME?,"Woodbridge, Virginia, United States",Yes,1
 153,YanNi Lee,"Owner, Vice President of the Board","Philadelphia, Pennsylvania, United States",Yes,0
 154,YanNi Lee,"Owner, Vice President Board Of Directors","Silver Spring, Maryland, United States",Yes,0
 155,LI (KELLY) XI,#Real estate investor#Import and export trade partner#Golf club CEO#Technology beauty business owner#,"Washington, District of Columbia, United States",Yes,126
@@ -162,14 +162,14 @@ id,name,bio,location,photo,followers
 160,LIsa Emma,Executive Director of L'Oreal - 欧莱雅,"New York, New York, United States",Yes,33
 161,Bella Smith,Senior Vice President Sales - L'Oréal,"Thomaston, Georgia, United States",Yes,99
 162,Ms.Lina Lee,L'Oréal-CEO-Market Research Manager,"New York, New York, United States",Yes,54
-163,Emily Chen,--Sr Project Manager,"Los Angeles, California, United States",Yes,299
+163,Emily Chen,#NAME?,"Los Angeles, California, United States",Yes,299
 164,Kristen Nguyen,Project Partners,"Beverly Hills, California, United States",Yes,113
-165,Xin (Celine) Zhang,"----Director of Operations at Mabwell (Shanghai) Bioscience Co., Ltd.","San Marino, California, United States",Yes,114
+165,Xin (Celine) Zhang,#NAME?,"San Marino, California, United States",Yes,114
 166,Chayla Huang,Managing General Partner - Kelton Global: Now Material,"Los Angeles, California, United States",Yes,289
 167,Jenny Chen,合伙人 - Raquel Allegra,"Irvine, California, United States",Yes,141
 168,Miral Basem,Brand Manager at L'Oréal | MSc Student,"Cairo, Egypt",Yes,"2,189"
 169,Millie Sheppard,Cosmetic beauty/travel enthusiast/leader,"Los Angeles, California, United States",Yes,33
-170,Beverly Chen,--Investment Partner,"Los Angeles, California, United States",Yes,451
+170,Beverly Chen,#NAME?,"Los Angeles, California, United States",Yes,451
 171,Hollie Walters,Cosmetic beauty / leader / travel enthusiast,"Los Angeles, California, United States",Yes,27
 172,Cynthia Gardner,Executive Director at Beverly Hills Plastic Surgery,"Brooklyn, New York, United States",Yes,257
 173,Hannah Waddingham,Executive Director at Beverly Hills Plastic Surgery,,Yes,125
@@ -188,7 +188,7 @@ id,name,bio,location,photo,followers
 186,Connie __Bc,Manager and Vice President,"North York, Ontario, Canada",Yes,12
 187,Li Joan,"16 years of operating the company, helping large and small companies to develop successfully, currently mainly responsible for J.ING, unique strategic vision, and diversified investors","Hacienda Heights, California, United States",Yes,117
 188,Claudia Torres,Senior Manager at Accenture Technology Solutions,"Rio de Janeiro, Brazil",Yes,"1,070"
-189,Daisy Doherty,--Market Development Director,"Arlington, Virginia, United States",Yes,4
+189,Daisy Doherty,#NAME?,"Arlington, Virginia, United States",Yes,4
 190,Cindy Lin,Operations Director,,Yes,3
 191,Ava Wade,Technology Manager,San Francisco Bay Area,Yes,8
 192,Min (Lyna) Lee,Director of Operations,"New York, New York, United States",No,163
@@ -274,7 +274,7 @@ id,name,bio,location,photo,followers
 272,Artie Zhang,Director Of Marketing And Development,"Toronto, Ontario, Canada",Yes,7
 273,vishal sharna,President & CEO,Greater Chicago Area,Yes,307
 274,Diana MacLeod,CEO at Manhattan bar,"Los Angeles, California, United States",Yes,283
-275,Lily liu,-- Marketing Development Director,United States,Yes,35
+275,Lily liu,#NAME?,United States,Yes,35
 276,Chloe Chloe,Director of Human Resources,"Toronto, Ontario, Canada",Yes,31
 277,Annie Chen,--,,Yes,0
 278,Mary Barton,Regional Management丨Regional Manager丨Regional Sales Manager,"Portland, Oregon, United States",Yes,29
@@ -302,7 +302,7 @@ id,name,bio,location,photo,followers
 300,Hua (Jenny) 🍁,Director of Human Resources,United States,Yes,29
 301,Nova Jenny,Director of Human Resources,United States,Yes,16
 302,Sophia (Jenny),Human Resources Director,United States,Yes,23
-303,Lilly LL,--Temasek  Director of Human Resources,Singapore,Yes,197
+303,Lilly LL,#NAME?,Singapore,Yes,197
 304,Lydia Jenny (★‿★),Director of Human Resources,"Ashburn, Virginia, United States",Yes,14
 305,A nna.,Core Consulting Solutions Technical Expert | Leadership | Decision Making | Strategic Cooperation | Strategic Planning | Enterprise Development,"Menlo Park, California, United States",Yes,107
 306,Tianyu Kong,Core Consulting Solutions Technical Expert | Leadership | Decision Making | Strategic Cooperation | Strategic Planning | Enterprise Development,United States,Yes,197
@@ -318,7 +318,7 @@ id,name,bio,location,photo,followers
 316,Hannah (林语) Lin,Director of Human Resources,"Ottawa, Ontario, Canada",Yes,372
 317,Natalie Scott,--,"Greenville, Ohio, United States",Yes,49
 318,Victoria (Jenny),Director of Human Resources,United States,Yes,29
-319,Jenny❣ Tim,--Human Resources Services,United States,Yes,26
+319,Jenny❣ Tim,#NAME?,United States,Yes,26
 320,Jenny🥂🥂❤️ Li,--,"Las Vegas, Nevada, United States",Yes,13
 321,Lisa Lin,manager at investment,"San Francisco, California, United States",Yes,105
 322,Ting Chen,manager at investment,"San Francisco, California, United States",Yes,106
@@ -347,8 +347,8 @@ id,name,bio,location,photo,followers
 345,Arianna Huffington,Manager and Vice President,United States,Yes,9
 346,Meilin Kathy🎉🎊,Manager and Vice President,"Los Angeles, California, United States",Yes,0
 347,Juli ana,Manager and Vice President,United States,Yes,38
-348,Connie Co,--Origins - Manager and Vice President,United States,Yes,0
-349,Sofia Ong,--Origins - Manager and Vice President,United States,Yes,0
+348,Connie Co,#NAME?,United States,Yes,0
+349,Sofia Ong,#NAME?,United States,Yes,0
 350,strawberry 🍓,Manager and Vice President,"Las Vegas, Nevada, United States",Yes,56
 351,Ariana Kaif,Manager and Vice president,United States,Yes,21
 352,🍦 ice cream,Manager and Vice President,United States,Yes,12
@@ -365,7 +365,7 @@ id,name,bio,location,photo,followers
 363,Emily M ✨✨,"Manager and Vice President ,  Supervisor , Sales Assistant",United States,Yes,5
 364,Patricia Anny,Manager and Vice President,United States,Yes,18
 365,Candy M,Manager and Vice President,United States,Yes,15
-366,Connie CEN,--Origins - Manager and Vice President,"Ashburn, Virginia, United States",Yes,16
+366,Connie CEN,#NAME?,"Ashburn, Virginia, United States",Yes,16
 367,diana parker,origins-manager and vice president,United States,Yes,1
 368,Connie Li,Origins - Manager and Vice President,"New York, New York, United States",Yes,0
 369,Li Connie,Origins - Manager and Vice President,United States,Yes,15
@@ -402,10 +402,10 @@ id,name,bio,location,photo,followers
 400,Candance Chen,Director of Operations，Direct Investor Business,San Francisco Bay Area,Yes,112
 401,Eleanore chen,Director of Operations，Direct Investor Business,San Francisco Bay Area,Yes,104
 402,Lorna Xu,Director of Operations at Founders,,Yes,155
-403,Eleanore Chen,--Director of Operations，Direct Investor Business,San Francisco Bay Area,Yes,111
+403,Eleanore Chen,#NAME?,San Francisco Bay Area,Yes,111
 404,Linda (Wen) Fang,Director of Operations at Founders Fund,"San Francisco, California, United States",Yes,2
 405,Athena Chen,运营总监，直接投资业务,San Francisco Bay Area,Yes,105
-406,Athena Chen,--Director of Operations，Direct Investor Business,San Francisco Bay Area,Yes,111
+406,Athena Chen,#NAME?,San Francisco Bay Area,Yes,111
 407,Peter Zhou,Director of Operations,"San Francisco, California, United States",Yes,152
 408,Basia Chen,Director of Operations，Direct Investor Business,San Francisco Bay Area,Yes,111
 409,Paul Zeng,GV's Partners,"Beverly Hills, California, United States",Yes,628
@@ -414,7 +414,7 @@ id,name,bio,location,photo,followers
 412,Wu xinlei,Investment Manager-Gv,United States,Yes,135
 413,Annie Su,GV Strategic Partnerships,"Daly City, California, United States",No,118
 414,Imogen Li,--,"New York, New York, United States",Yes,2
-415,Darlene Gu,--Never look for a star team during the start-up period and never look for someone who has already been successful.,"Evanston, Wyoming, United States",Yes,293
+415,Darlene Gu,#NAME?,"Evanston, Wyoming, United States",Yes,293
 416,Bonny Su,GV Strategic Partnerships,"Daly City, California, United States",Yes,134
 417,Wendy Su,GV Strategic Partnerships,"New York, New York, United States",Yes,90
 418,Lin xixi,Financial Professionals,"New York, New York, United States",Yes,44
@@ -443,11 +443,11 @@ id,name,bio,location,photo,followers
 441,Marry Emma,Associate Director,"Santa Monica, California, United States",Yes,2
 442,Kaylee Brooks,Senior Software Engineer | Data center operation and maintenance engineer | Project Manager,San Francisco Bay Area,Yes,10
 443,Kora Medina,--,"Santa Monica, California, United States",Yes,6
-444,boonie Glenn,--IT Consultant - Associate Director,"Santa Monica, California, United States",Yes,10
+444,boonie Glenn,#NAME?,"Santa Monica, California, United States",Yes,10
 445,Sixta (ShangGuan Jia Hui) Glaeser,IT Consultant - Associate Director,"Santa Monica, California, United States",Yes,20
 446,Kora Lucas,--,,Yes,8
 447,carroll smith,IT Consultant - Associate Director - STRV,"Santa Monica, California, United States",Yes,0
-448,Ruth Hester,----IT Consultant - Associate Director,"Los Angeles, California, United States",Yes,11
+448,Ruth Hester,#NAME?,"Los Angeles, California, United States",Yes,11
 449,Amy chen,-,"New York, New York, United States",Yes,135
 450,Ross Lin,KIKICHIC,"New York, New York, United States",Yes,174
 451,Hannah Lee,CEO of KIKICHIC,"New York, New York, United States",Yes,0
@@ -501,7 +501,7 @@ id,name,bio,location,photo,followers
 499,Dora LEE,Sales Director and U.S. Furniture Market Development,"Los Angeles, California, United States",Yes,136
 500,carl faraldo,Clothing store owner,San Francisco Bay Area,Yes,0
 501,Millie Lee,Beauty and Skin Care,"Queens, New York, United States",Yes,96
-502,wu (Amy) jiajia,--La Queen Aesthetics Skin Care General Manager Aesthetician,"Queens, New York, United States",Yes,118
+502,wu (Amy) jiajia,#NAME?,"Queens, New York, United States",Yes,118
 503,motong (Allie) chen,shareholder,"New York, New York, United States",Yes,60
 504,NaNa an,Executive Assistant to General Manager - La Queen Aesthetics Skin Care,"New York, New York, United States",Yes,2
 505,Amy Di,--,"New Point, Virginia, United States",Yes,6
@@ -524,7 +524,7 @@ id,name,bio,location,photo,followers
 522,Cassie Lee,medical plastic surgery,"Tobyhanna, Pennsylvania, United States",Yes,453
 523,Li Li,CEO-More Design & Build Group,"New York, New York, United States",Yes,570
 524,Alicia (Woods) woods,Assistant Manager at Florist,"Palatka, Florida, United States",No,12
-525,Eiko Inoue,--investor,United States,Yes,104
+525,Eiko Inoue,#NAME?,United States,Yes,104
 526,Alyssa Mrie,"Good evening, it's nice to connect with you here","San Francisco, California, United States",Yes,166
 527,Anna Gorman,Investors at The Estée Lauder Companies Inc.,"Vancouver, British Columbia, Canada",Yes,39
 528,AiLin Mack,investor,"Houston, Texas, United States",Yes,0
@@ -560,7 +560,7 @@ id,name,bio,location,photo,followers
 558,Beautiful Chen,Vice President of Marketing and Head of U.S.,"Los Angeles, California, United States",Yes,93
 559,Tilly O'Brien,Vice President of Marketing and Head of U.S.,"New York, New York, United States",Yes,5
 560,Morgan Nash,Vice President of Marketing and Head of U.S,"New York, New York, United States",Yes,8
-561,Demi Heath,--Vice President of Marketing and Head of U.S.,"New York, New York, United States",Yes,5
+561,Demi Heath,#NAME?,"New York, New York, United States",Yes,5
 562,Lisa Kelly,Vice President of Marketing and Head of U.S.,Los Angeles Metropolitan Area,Yes,0
 563,jeffery harrold,Vice President of Marketing and Head of U.S.,"Boca Raton, Florida, United States",Yes,284
 564,Debbie E.,Vice President of Marketing and Head of U.S.,Los Angeles Metropolitan Area,Yes,0
@@ -581,7 +581,7 @@ id,name,bio,location,photo,followers
 579,鲜榨果汁,Market Research Manager,United States,Yes,240
 580,甜心女王,Market Research Manager,United States,Yes,291
 581,An Ran (Her /She) Li,Marketing Manager/MBA/Chef/Golf/Skiing,"Markham, Ontario, Canada",Yes,414
-582,Anna Li,--Currently working as Market Research Manager. I have my own business meeting and investment through my own efforts. Hope to know more friends,"Greater Toronto Area, Canada",Yes,22
+582,Anna Li,#NAME?,"Greater Toronto Area, Canada",Yes,22
 583,Jenny Sn,Marketing Department Research Manager,"New York, New York, United States",Yes,25
 584,Joanna Zh,Marketing Department Research Manager,"New York, New York, United States",Yes,34
 585,Cherry P,Elizabeth Arden Manager,"Los Angeles, California, United States",Yes,21
@@ -786,7 +786,7 @@ id,name,bio,location,photo,followers
 784,Nigel Milligan,Helping schools and businesses with their IT and more âœ…âœ…âœ…,"Bury, England, United Kingdom",Yes,"3,141"
 785,Nina de Sausmarez,Helping purpose driven coaches build and grow their high performing business from the heart | Director Of Breakthroughs | SOLD OUT Global Events | 90+ 5- star Google Reviews | singer!,United Kingdom,Yes,"8,999"
 786,Nithya Ruff,"Chief Open Source Officer | Board Member | Digital Transformation & Innovation | Corporate Governance | Member, Top 70 Board Ready Women  at FirstBoard.ioâ„¢",Raleigh-Durham-Chapel Hill Area,Yes,"7,016"
-787,"Nuraan ""Nu"" Arnold",So NOT mellanmjÃ¶lk! ---> Passionate about creating memorable people experiences,Greater Stockholm Metropolitan Area,Yes,758
+787,Nuraan Nu Arnold,So NOT mellanmjÃ¶lk! ---> Passionate about creating memorable people experiences,Greater Stockholm Metropolitan Area,Yes,758
 788,"Laura Harris, Ph.D.",Senior Bioinformatics Scientist at NeuroX1,Greater Lansing,Yes,"10,768"
 789,Omar Abdallah,"Professional Site Supervision ,Quantity Surveyor",Palestinian Authority,No,"27,746"
 790,Sheila P.,Talent Strategist & Organizational Designer @KPMG,Greater Chicago Area,Yes,"1,103"
@@ -983,8 +983,8 @@ id,name,bio,location,photo,followers
 981,Noly Morimoto,"Chief Technology Officer and Vice President, IBM Research & Development - Japan",Japan,No,"2,470"
 982,Yasir Javed,Chief Executive at Renzym,Pakistan,Yes,"1,401"
 983,Giovanni De Magistris,Sr Manager - AI Engineering at Baker Hughes,Italy,Yes,"1,404"
-984,Arpit Singh,"ML Engineer | 181K+ followers | ➤ click ""Follow"" to see all my future posts!","New Delhi, Delhi, India",Yes,"181,535"
-985,Hannes Fassold,"researcher at JOANNEUM RESEARCH Forschungsgesellschaft mbH, founder ""Fassold Seminare""",Austria,Yes,"31,193"
+984,Arpit Singh,ML Engineer | 181K+ followers | ➤ click Follow to see all my future posts!,"New Delhi, Delhi, India",Yes,"181,535"
+985,Hannes Fassold,"researcher at JOANNEUM RESEARCH Forschungsgesellschaft mbH, founder Fassold Seminare",Austria,Yes,"31,193"
 986,George Shitikov,Personal views only. Software Technical Architect at UCOG,San Francisco Bay Area,Yes,916
 987,Aggie Branczyk 🦋,A physicist having fun in quantum tech,"Waterloo, Ontario, Canada",Yes,"8,745"
 988,Alexander Ratner,Co-founder and CEO at Snorkel AI,"Menlo Park, California, United States",Yes,"3,416"
@@ -1123,7 +1123,7 @@ id,name,bio,location,photo,followers
 1121,James Faccinto,Principal at Full Complement,"Los Angeles, California, United States",Yes,794
 1122,Zach Gerasin,"Director, Trust & Safety at Nike","Portland, Oregon, United States",No,"1,162"
 1123,Matthew Roberts,Strategic Finance | Sales Development,"Sacramento, California, United States",Yes,"12,290"
-1124,Scott Ward,"Father, Husband -$10 Million ARR Closed Won in One Role - ex Datanyze now Zoominfo - Sales Tool Tech Stack Expert  - Building the Future with Cutting Edge Founders - DEI ""Peoples Champ"" SDR/BDR Advocate","San Francisco, California, United States",Yes,"7,298"
+1124,Scott Ward,"Father, Husband -$10 Million ARR Closed Won in One Role - ex Datanyze now Zoominfo - Sales Tool Tech Stack Expert  - Building the Future with Cutting Edge Founders - DEI Peoples Champ SDR/BDR Advocate","San Francisco, California, United States",Yes,"7,298"
 1125,Maria Sander,"Sr. Area Vice President, MuleSoft Commercial Business",San Francisco Bay Area,No,"3,260"
 1126,John Herlihy,"Manager, Recruiting - GTM / SE / Partner Ecosystem | We are hiring!","New York, New York, United States",No,"11,720"
 1127,Giorgina T.,Sr. Manager - Partner Success at Salesforce,United States,No,514
@@ -1288,7 +1288,7 @@ id,name,bio,location,photo,followers
 1286,Henry Schade,Proven Product Management Leader building great teams and great products.,"Amherst, New Hampshire, United States",Yes,
 1287,Emily Mossburg,Deloitte Global Cyber Leader,"Washington, District of Columbia, United States",Yes,
 1288,"Dr. Jason Edwards, DMIST, CISSP, CRISC","Principal @ Amazon, Adjunct Professor of Cyber/IT, Veteran, Public Speaker, Aspiring Comedian","San Antonio, Texas, United States",Yes,
-1289,"Charles ""Butch"" Klescewski",Healthcare Partner at KPMG US,Greater Chicago Area,Yes,
+1289,Charles Butch Klescewski,Healthcare Partner at KPMG US,Greater Chicago Area,Yes,
 1290,Andy Lanik,Partner at KPMG LLP,"Minneapolis, Minnesota, United States",No,
 1291,Marc Scher,Partner in Charge of KPMG LLP's Global and U.S. Healthcare Audit Practice,"Irvine, California, United States",No,
 1292,Keith Shurbutt,"Audit professional - healthcare, not-for-profit & government","Atlanta, Georgia, United States",No,
@@ -1870,7 +1870,7 @@ Chief Architect- Cybersecurity, Blockchain,AI & open source","Ernakulam, Kerala,
 1864,Paula James-Martinez,"Thought Leader, Founder of The Mother Lovers, Strategic Storyteller, Director and Producer.","Pasadena, California, United States",Yes,
 1865,Kristin (Kris) Conrad,Director of Midwifery at LewisGale Physicians,"Salem, Virginia, United States",Yes,
 1866,"George Sarianos, CPA, CFA",Partner at CFGI,"Philadelphia, Pennsylvania, United States",Yes,
-1867,Chapter Relations Team,"""If your actions inspire others to dream more, learn more, do more and become more, you are a leader.""","Westchester, Illinois, United States",Yes,
+1867,Chapter Relations Team,"If your actions inspire others to dream more, learn more, do more and become more, you are a leader.","Westchester, Illinois, United States",Yes,
 1868,"Darius Browne, CPA",International Business Student interested in Organizational Psychology/Change & Management Consulting,"Claymont, Delaware, United States",No,
 1869,Anthony Saba,"Manager, Talent Acquisition, Experienced Hire Audit","Pittsburgh, Pennsylvania, United States",Yes,
 1870,Kimberly Shultz,Partner at KPMG,"Philadelphia, Pennsylvania, United States",Yes,
@@ -2110,7 +2110,7 @@ Asia Pacific Latin America","Beaverton, Oregon, United States",Yes,
 2102,Dee Cohen Katz,"Managing Partner at Walsworth | Experienced in Toxic Tort, Products Liability and General Liability Defense Litigation","Irvine, California, United States",Yes,
 2103,"Brent McLacklan, Esq.",Account Executive Attorney,"Lake Mary, Florida, United States",Yes,
 2104,"Souna Odom, M.S.",Highly accomplished professional with 7+ years of experience  in Change Management,Greater Orlando,Yes,
-2105,"Bodie Nowak, CSAM","""The most important thing in communication is hearing what isn't said."" ~ Pete Drucker",Dallas-Fort Worth Metroplex,No,
+2105,"Bodie Nowak, CSAM",The most important thing in communication is hearing what isn't said. ~ Pete Drucker,Dallas-Fort Worth Metroplex,No,
 2106,Lily Pappanikou,Graduate of Loyola University Chicago,"Chicago, Illinois, United States",Yes,
 2107,Ruth McMullin,"Chief Deputy Clerk of Court, Gwinnett County","Lawrenceville, Georgia, United States",Yes,
 2108,Courtney Stombock,"Associate Dean, Advancement and Alumni Engagement at Emory University School of Law","Atlanta, Georgia, United States",No,
@@ -2181,11 +2181,11 @@ Asia Pacific Latin America","Beaverton, Oregon, United States",Yes,
 2173,Leah Marchand,Artist & Production Director,Baton Rouge Metropolitan Area,Yes,
 2174,TAMMY ESTWICK,National Correspondent at Newsy,"New Orleans, Louisiana, United States",Yes,
 2175,Laura Rees Acosta (she/her/hers),People Champion. DEI Strategist. Innovator and Disrupter. Executive Coach. C-Suite Advisor. Change Agent. Communications Pro. Employment Lawyer.,"Auburndale, Massachusetts, United States",Yes,
-2176,Ruchika Tulshyan,"Best-Selling Author of ""Inclusion on Purpose""",Greater Seattle Area,Yes,
+2176,Ruchika Tulshyan,Best-Selling Author of Inclusion on Purpose,Greater Seattle Area,Yes,
 2177,Tim (Douglas T.) Hall,Retirement Transition Study Researcher at Harvard Business School,"West Newton, Massachusetts, United States",Yes,
 2178,Quinetta Roberson,John A. Hannah Distinguished Professor of Management and Psychology at Michigan State University,"East Lansing, Michigan, United States",No,
 2179,Dr. Courtney L. McCluney,Recovering from Overwork | Writer | Consultant | Advisor,United States,Yes,
-2180,Marc Gruber,"Editor-in-Chief AMJ, Prof. of Entrepreneurship & Tech Commercialization EPFL, Co-author ""WHERE TO PLAY"" (lean toolset), Board Member SWISSPOD Technologies SA (Hyperloop) and AMPLIFY SA","Lausanne, Vaud, Switzerland",No,
+2180,Marc Gruber,"Editor-in-Chief AMJ, Prof. of Entrepreneurship & Tech Commercialization EPFL, Co-author WHERE TO PLAY (lean toolset), Board Member SWISSPOD Technologies SA (Hyperloop) and AMPLIFY SA","Lausanne, Vaud, Switzerland",No,
 2181,Lindsay Kaplan,Co-Founder at Chief,"New York, New York, United States",Yes,
 2182,Fiona Macaulay,Founder-CEO WILD | Prof. @ Georgetown University McDonough School of Business | TedX speaker | Inc.com Columnist,Washington DC-Baltimore Area,Yes,
 2183,Dr. Poornima Luthra (She/ Her),Author | Educator | DEI Expert | Tedx Speaker | Thinkers50 Radar Class of 2023 | Board Member,"Copenhagen, Capital Region, Denmark",Yes,
@@ -2212,7 +2212,7 @@ Asia Pacific Latin America","Beaverton, Oregon, United States",Yes,
 2204,Greg Engel,Vice Chair - Tax at KPMG US,"Houston, Texas, United States",No,
 2205,Rema Serafi,National Managing Partner - Tax at KPMG US,"New York, New York, United States",Yes,
 2206,Angela Johnson,Partner at Fifth Wall,New York City Metropolitan Area,Yes,
-2207,"""Gigi"" Lucero",Senior Talent Acquistion Specialist |Veteran Outreach and Mentor| Best for Vets| 3X Military Friendly,Washington DC-Baltimore Area,Yes,
+2207,Gigi Lucero,Senior Talent Acquistion Specialist |Veteran Outreach and Mentor| Best for Vets| 3X Military Friendly,Washington DC-Baltimore Area,Yes,
 2208,Lola Bakare,CMO Advisor l Author “Responsible Marketing” | Anthem Award-Winning Inclusive Marketing Strategist | Keynote Speaker | Moderator | Workshop Facilitator | Linkedin Top Voice in Marketing 2022,"Philadelphia, Pennsylvania, United States",Yes,
 2209,"Brandy L. Simula, PhD, ACC 🏳️‍🌈",Leadership & organizational development consultant | ICF executive & leadership coach | Forbes Coaches Council Member | Behavioral scientist | Passionate about helping individuals & organizations cultivate flourishing,"Atlanta, Georgia, United States",Yes,
 2210,"Alexis Tumblin, MHA, M.S., CPhT",Clinical Research Professional | BWICR Member,"Atlanta, Georgia, United States",No,
@@ -2351,7 +2351,7 @@ Asia Pacific Latin America","Beaverton, Oregon, United States",Yes,
 2343,Jeanty Bernier,"Academic Program Specialist at Medgar Evers College, CUNY","Brooklyn, New York, United States",Yes,
 2344,John Ratzan,Managing Director at Accenture,"New York, New York, United States",Yes,
 2345,Stefania Brunori,"Personal Branding / TED x Speaker / Social Media & Digital / Content Marketing / Brand Strategy 👉 Consultant, Coach and Trainer 🧘 Wellbeing Entrepreneur & Yoga Enthusiast","Dubai, United Arab Emirates",Yes,
-2346,Debbie Barnard,"Visionary Strategic Leader, Personal Mastery Strategist, Coach, Consultant, Speaker, and Facilitator. “Helping to build better leaders to get better results""","Dubai, United Arab Emirates",Yes,
+2346,Debbie Barnard,"Visionary Strategic Leader, Personal Mastery Strategist, Coach, Consultant, Speaker, and Facilitator. “Helping to build better leaders to get better results","Dubai, United Arab Emirates",Yes,
 2347,Brian Curee,Marketing Consultant & Digital Content Strategist | Helping businesses connect with people to earn trust and create community across digital marketing platforms.,"Lake Wales, Florida, United States",Yes,
 2348,Scott Wozniak,CEO of Swoz Consulting | Helping leaders build legendary brands,Atlanta Metropolitan Area,Yes,
 2349,"R. Wesley Webb, MBA, MS",Management Program Analyst,"Germantown, Maryland, United States",No,
