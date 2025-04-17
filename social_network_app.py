@@ -1,3 +1,5 @@
+import os
+
 curr_user = {}
 
 def signup():
@@ -18,6 +20,11 @@ def login():
     username = input("Username: ")
     password = input("Password: ")
 
+    curr_user['username'] = username
+    curr_user['password'] = password
+
+    return True
+
     # verify credentials
     valid_credentials = False
     if valid_credentials:
@@ -28,16 +35,28 @@ def login():
         return False
 
 def show_menu():
-    print("\n=== Social Network App ===")
-    print("1. Option A")
-    print("2. Option B")
-    print("3. Exit")
+    print("User Management")
+    print("1. View Profile")
+    print("2. Edit Profile")
+
+    print("\nSocial Graph")
+    print("3. Follow a User")
+    print("4. Unfollow a User")
+    print("5. View Friends/Connections")
+    print("6. Mutual Connections")
+    print("7. Friend Recommendations")
+
+    print("\nSearch & Exploration")
+    print("8. Search Users")
+    print("9. Explore Popular Users")
+
+    print("\n10. Exit")
 
 def main():
+
     authenticated = False
 
     while not authenticated:
-        print("=== Social Network App ===")
         print("1. Login")
         print("2. Sign Up")
         print("3. Exit")
@@ -55,14 +74,17 @@ def main():
 
     # Show main menu after successful login
     while True:
+        os.system("cls")
+        print("\n=== Social Network App ===\n")
         show_menu()
-        choice = input("Choose an option (1-3): ")
+
+        choice = input("Choose an option (1-10): ")
 
         if choice == "1":
-            break
+            pass
         elif choice == "2":
-            break
-        elif choice == "3":
+            pass
+        elif choice == "10":
             print("Thank you, come again!")
             break
         else:
