@@ -90,6 +90,50 @@ def execute_get_mutuals():
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
 
-def create_user(name, username, email, password):
-     query = """MATCH (p:User {name: $name})<-[:FOLLOWS]-(f:User) 
-         RETURN f"""
+# create user on sign up
+def create_user(tx, name, username, email, password):
+    query = """
+     MATCH (u:User)
+    WHERE u.email = $email OR u.username = $username
+    WITH count(u) AS existingCount
+    CALL apoc.do.when(
+        existingCount = 0,
+        'CREATE (newUser:User {
+            name: $name, 
+            email: $email, 
+            username: $username, 
+            password: $password,
+            createdAt: datetime()
+        })
+        RETURN {message: "User created successfully", user: newUser, success: true} AS result',
+        'RETURN {message: "Email or username already exists", user: null, success: false} AS result',
+        {name: $name, email: $email, username: $username, password: $password}
+    ) YIELD value
+    RETURN value.result AS result
+    """
+    
+    result = tx.run(query, name=name, username=username, email=email, password=password)
+    record = result.single()
+    return record["result"]
+
+def execute_create_user(name, username, email, password):
+    params = {
+        "name": name,
+        "username": username,
+        "email": email,
+        "password": password,
+    }
+
+    for field in params:
+        print(field, params[field], len(params[field]))
+        if len(params[field]) == 0:
+            return f"Error: {field} cannot be empty", None
+    
+    try:
+        driver = get_driver()
+
+        with driver.session() as session:
+            result = session.execute_write(create_user, name, username, email, password)
+            return result["message"], result["user"]
+    except exceptions.Neo4jError as e:
+        return f"Neo4j Error: {e.message}", None

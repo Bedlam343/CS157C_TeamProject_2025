@@ -1,4 +1,5 @@
 import os
+import queries
 
 curr_user = {}
 
@@ -10,10 +11,16 @@ def signup():
     email = input("Email: ")
     password = input("Choose a password: ")
 
-    # verify that unique username and email
-    
-    print("Signup successful! You can now log in.\n")
-    return True
+    message, user = queries.execute_create_user(name, username, email, password)
+    print('\n', message)
+
+    if user is not None:
+        curr_user["name"] = name
+        curr_user["username"] = username
+        curr_user["email"] = email
+        return True
+
+    return False
 
 def login():
     print("\n=== Login ===")
@@ -23,16 +30,7 @@ def login():
     curr_user['username'] = username
     curr_user['password'] = password
 
-    return True
-
-    # verify credentials
-    valid_credentials = False
-    if valid_credentials:
-        print("Login successful!\n")
-        return True
-    else:
-        print("Invalid credentials. Please try again.\n")
-        return False
+    return False
 
 def show_menu():
     print("User Management")
@@ -53,10 +51,12 @@ def show_menu():
     print("\n10. Exit")
 
 def main():
-
+    os.system("cls")
+    global curr_user
     authenticated = False
 
     while not authenticated:
+        print("\n=== Social Network App ===\n")
         print("1. Login")
         print("2. Sign Up")
         print("3. Exit")
@@ -65,7 +65,7 @@ def main():
         if choice == "1":
             authenticated = login()
         elif choice == "2":
-            signup()
+            authenticated = signup()
         elif choice == "3":
             print("Goodbye!")
             return
@@ -76,6 +76,9 @@ def main():
     while True:
         os.system("cls")
         print("\n=== Social Network App ===\n")
+
+        print(f"Welcome, {curr_user['name']}!\n")
+
         show_menu()
 
         choice = input("Choose an option (1-10): ")
