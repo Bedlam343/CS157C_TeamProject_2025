@@ -1,5 +1,10 @@
 from db_connection import get_driver
 from neo4j import exceptions
+from social_network_app import get_current_name
+from social_network_app import get_current_username
+
+name = get_current_name()
+username = get_current_username()
 
 # View Friends/Connections - A user can see a list of people they are following.
 def get_following(tx, name): 
@@ -19,7 +24,7 @@ def execute_get_following():
     try:
         driver = get_driver()
         with driver.session() as session:
-            followed = session.execute_read(get_following, name="Rachel Lally") # substitute for the user's name later
+            followed = session.execute_read(get_following, name=name)
             print('\033[1m'"\033[4m" + "Your Following List:" + '\033[0m')
             if len(followed) == 0:
                 print("You are currently not following any users.")
@@ -48,7 +53,7 @@ def execute_get_followers():
     try:
         driver = get_driver()
         with driver.session() as session:
-            followers = session.execute_read(get_followers, name="Ganesh Bisht") # substitute for the user's name later
+            followers = session.execute_read(get_followers, name=name)
             print('\033[1m'"\033[4m" + "Your Followers:" + '\033[0m')
             if len(followers) == 0:
                 print("You currently have no users following you.")
@@ -78,7 +83,7 @@ def execute_get_mutuals():
     try:
         driver = get_driver()
         with driver.session() as session:
-            mutuals = session.execute_read(get_mutuals, name="Sandra C. Fogg", friend="Meryl Allison") # substitute for the user's/friend's name later
+            mutuals = session.execute_read(get_mutuals, name=name, friend="Meryl Allison") # substitute for the user's/friend's name later
             # print(f"\033[1m\033[4mMutual Friends with {friend}:\033[0m")
             print('\033[1m'"\033[4m" + "Your Mutual Friends:" + '\033[0m')
             if len(mutuals) == 0:

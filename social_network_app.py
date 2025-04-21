@@ -32,6 +32,12 @@ def login():
 
     return False
 
+def get_current_name():
+    return curr_user['name']
+
+def get_current_username():
+    return curr_user['email']
+
 def show_menu():
     print("User Management")
     print("1. View Profile")
