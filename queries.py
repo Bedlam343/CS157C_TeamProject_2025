@@ -83,7 +83,7 @@ def execute_get_mutuals():
     try:
         driver = get_driver()
         with driver.session() as session:
-            mutuals = session.execute_read(get_mutuals, name=name, friend="Meryl Allison") # substitute for the user's/friend's name later
+            mutuals = session.execute_read(get_mutuals, name=name, friend="Meryl Allison") # substitute for friend's name later
             # print(f"\033[1m\033[4mMutual Friends with {friend}:\033[0m")
             print('\033[1m'"\033[4m" + "Your Mutual Friends:" + '\033[0m')
             if len(mutuals) == 0:
