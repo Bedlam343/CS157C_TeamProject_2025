@@ -1,22 +1,17 @@
 from db_connection import get_driver
 from neo4j import exceptions
-from social_network_app import get_current_name
-from social_network_app import get_current_username
-
-name = get_current_name()
-username = get_current_username()
 
 # View Friends/Connections - A user can see a list of people they are following.
-def get_following(tx, name): 
+def get_following(tx, currentName): 
     """
     Handles the query and runs the transaction to return the nodes a user is following.
     """
-    query = """MATCH (p:User {name: $name})-[:FOLLOWS]->(f:User) 
+    query = """MATCH (p:User {name: $currentName})-[:FOLLOWS]->(f:User) 
         RETURN f"""
-    nodes = tx.run(query, name=name)
+    nodes = tx.run(query, name=currentName)
     return [node["f"]["name"] for node in nodes]
 
-def execute_get_following():
+def execute_get_following(currentName):
     """
     Manages the DB session, executes the get_following() query, and stylizes the output.
     Call this function in other files to return a user's following.
@@ -24,7 +19,7 @@ def execute_get_following():
     try:
         driver = get_driver()
         with driver.session() as session:
-            followed = session.execute_read(get_following, name=name)
+            followed = session.execute_read(get_following, name=currentName)
             print('\033[1m'"\033[4m" + "Your Following List:" + '\033[0m')
             if len(followed) == 0:
                 print("You are currently not following any users.")
@@ -35,17 +30,17 @@ def execute_get_following():
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
 
-# # View Friends/Connections - A user can see a list of people who follow them.
-def get_followers(tx, name):
+# View Friends/Connections - A user can see a list of people who follow them.
+def get_followers(tx, currentName):
     """
     Handles the query and runs the transaction to return the nodes that follow a user.
     """
-    query = """MATCH (p:User {name: $name})<-[:FOLLOWS]-(f:User) 
+    query = """MATCH (p:User {name: $currentName})<-[:FOLLOWS]-(f:User) 
         RETURN f"""
-    nodes = tx.run(query, name=name)
+    nodes = tx.run(query, name=currentName)
     return [node["f"]["name"] for node in nodes]
 
-def execute_get_followers():
+def execute_get_followers(currentName):
     """
     Manages the DB session, executes the get_followers() query, and stylizes the output.
     Call this function in other files to return a user's followers.
@@ -53,7 +48,7 @@ def execute_get_followers():
     try:
         driver = get_driver()
         with driver.session() as session:
-            followers = session.execute_read(get_followers, name=name)
+            followers = session.execute_read(get_followers, name=currentName)
             print('\033[1m'"\033[4m" + "Your Followers:" + '\033[0m')
             if len(followers) == 0:
                 print("You currently have no users following you.")
@@ -65,17 +60,17 @@ def execute_get_followers():
         print(f"Neo4j Error: {e.message}")
 
 # View Mutual Connections - A user can see mutual friends (users followed by both parties).
-def get_mutuals(tx, name, friend):
+def get_mutuals(tx, currentName, friendName):
     """
         Handles the query and runs the transaction to return the nodes that both the 
         user and the specified friend follows.
     """
-    query = """MATCH (p:User {name: $name})-[:FOLLOWS]->(f:User), (p2:User {name: $friend})-[:FOLLOWS]->(f:User)
+    query = """MATCH (p:User {name: $currentName})-[:FOLLOWS]->(f:User), (p2:User {name: $friendName})-[:FOLLOWS]->(f:User)
         RETURN f"""
-    nodes = tx.run(query, name=name, friend=friend)
+    nodes = tx.run(query, name=currentName, friend=friendName)
     return [node["f"]["name"] for node in nodes]
 
-def execute_get_mutuals():
+def execute_get_mutuals(currentName, friendName):
     """
     Manages the DB session, executes the get_mutuals() query, and stylizes the output.
     Call this function in other files to return a user's mutuals friends with another user.
@@ -83,14 +78,64 @@ def execute_get_mutuals():
     try:
         driver = get_driver()
         with driver.session() as session:
-            mutuals = session.execute_read(get_mutuals, name=name, friend="Meryl Allison") # substitute for friend's name later
-            # print(f"\033[1m\033[4mMutual Friends with {friend}:\033[0m")
+            mutuals = session.execute_read(get_mutuals, name=currentName, friend=friendName)
             print('\033[1m'"\033[4m" + "Your Mutual Friends:" + '\033[0m')
             if len(mutuals) == 0:
                 print("You have no mutual friends with this user.")
             else:
                 for user in mutuals:
                     print(user)
+        driver.close()
+    except exceptions.Neo4jError as e:
+        print(f"Neo4j Error: {e.message}")
+
+# Follow Another User - A user can follow another user, creating a "FOLLOWS" relationship in Neo4j.
+def follow(tx, currentName, targetName):
+    query = """ 
+    MATCH (u:User {name: $currentName})
+    MATCH (u2:User {name: $targetName})
+    MERGE (u)-[:FOLLOWS]->(u2)
+    WHERE u.name <> u2.name
+    RETURN u, u2
+    """
+    result = tx.run(query, currentUser=currentName, targetUser=targetName)
+    return result
+
+def execute_follow(currentName, targetName):
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            follow = session.execute_write(follow, currentName=currentName, targetName=targetName)
+            print(f"You are now following {targetName}!")
+        driver.close()
+    except exceptions.Neo4jError as e:
+        print(f"Neo4j Error: {e.message}")
+
+# Unfollow a User - A user can unfollow another user, removing the "FOLLOWS" relationship.
+def unfollow(tx, currentName, targetName):
+    query = """ 
+    MATCH (u:User {name: $currentName})
+    MATCH (u2:User {name: $targetName})
+    MATCH (u)-[f:FOLLOWS]->(u2)
+    DELETE f
+    RETURN COUNT(f) AS deleted
+    """
+    result = tx.run(query, currentUser=currentName, targetUser=targetName)
+    record = result.single()
+    if record:
+        return record["deleted"] > 0
+    else:
+        return False
+
+def execute_unfollow(currentName, targetName):
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            unfollow = session.execute_write(unfollow, currentName=currentName, targetName=targetName)
+            if unfollow:
+                print(f"You unfollowed {targetName}!")
+            else:
+                print(f"You aren't following {targetName} yet.")
         driver.close()
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
