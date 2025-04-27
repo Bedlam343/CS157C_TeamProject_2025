@@ -1,4 +1,5 @@
 import os
+import sys
 import queries
 
 curr_user = {}
@@ -97,13 +98,16 @@ def main():
         elif choice == "2":
             pass
         elif choice == "5":
-            followers = queries.execute_get_followers(currentName=curr_user["name"])
-            print(followers)
+            print('\n')
+            queries.execute_get_followers(currentName=curr_user["name"])
+            print('\n')
         elif choice == "10":
             print("Thank you, come again!")
             break
         else:
             print("Invalid choice. Please try again.")
+
+        input("Press Enter to continue...")
 
 if __name__ == "__main__":
     main()

@@ -37,7 +37,7 @@ def get_followers(tx, currentName):
     """
     query = """MATCH (p:User {name: $currentName})<-[:FOLLOWS]-(f:User) 
         RETURN f"""
-    nodes = tx.run(query, name=currentName)
+    nodes = tx.run(query, currentName=currentName)
     return [node["f"]["name"] for node in nodes]
 
 def execute_get_followers(currentName):
@@ -48,7 +48,7 @@ def execute_get_followers(currentName):
     try:
         driver = get_driver()
         with driver.session() as session:
-            followers = session.execute_read(get_followers, name=currentName)
+            followers = session.execute_read(get_followers, currentName=currentName)
             print('\033[1m'"\033[4m" + "Your Followers:" + '\033[0m')
             if len(followers) == 0:
                 print("You currently have no users following you.")
