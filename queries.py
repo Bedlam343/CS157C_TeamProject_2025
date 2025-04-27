@@ -8,7 +8,7 @@ def get_following(tx, currentName):
     """
     query = """MATCH (p:User {name: $currentName})-[:FOLLOWS]->(f:User) 
         RETURN f"""
-    nodes = tx.run(query, name=currentName)
+    nodes = tx.run(query, currentName=currentName)
     return [node["f"]["name"] for node in nodes]
 
 def execute_get_following(currentName):
@@ -19,8 +19,8 @@ def execute_get_following(currentName):
     try:
         driver = get_driver()
         with driver.session() as session:
-            followed = session.execute_read(get_following, name=currentName)
-            print('\033[1m'"\033[4m" + "Your Following List:" + '\033[0m')
+            followed = session.execute_read(get_following, currentName=currentName)
+            print('\n\033[1m'"\033[4m" + "Your Following List:" + '\033[0m')
             if len(followed) == 0:
                 print("You are currently not following any users.")
             else: 
@@ -35,7 +35,7 @@ def get_followers(tx, currentName):
     """
     Handles the query and runs the transaction to return the nodes that follow a user.
     """
-    query = """MATCH (p:User {name: $currentName})-[:FOLLOWS]-(f:User) 
+    query = """MATCH (p:User {name: $currentName})<-[:FOLLOWS]-(f:User) 
         RETURN f"""
     nodes = tx.run(query, currentName=currentName)
     return [node["f"]["name"] for node in nodes]
@@ -49,7 +49,7 @@ def execute_get_followers(currentName):
         driver = get_driver()
         with driver.session() as session:
             followers = session.execute_read(get_followers, currentName=currentName)
-            print('\033[1m'"\033[4m" + "Your Followers:" + '\033[0m')
+            print('\n\033[1m'"\033[4m" + "Your Followers:" + '\033[0m')
             if len(followers) == 0:
                 print("You currently have no users following you.")
             else:
