@@ -43,18 +43,18 @@ def login():
     return False
 
 def show_menu():
-    print("User Management")
+    print("\033[1m" + "User Management" + "\033[0m")
     print("1. View Profile")
     print("2. Edit Profile")
 
-    print("\nSocial Graph")
+    print("\n\033[1m" + "Social Graph" + "\033[0m")
     print("3. Follow a User")
     print("4. Unfollow a User")
     print("5. View Friends/Connections")
     print("6. Mutual Connections")
     print("7. Friend Recommendations")
 
-    print("\nSearch & Exploration")
+    print("\n\033[1m" + "Search & Exploration" + "\033[0m")
     print("8. Search Users")
     print("9. Explore Popular Users")
 
@@ -66,7 +66,7 @@ def main():
     authenticated = False
 
     while not authenticated:
-        print("\n=== Social Network App ===\n")
+        print('\033[1m'"\033[4m" + "=== Social Network App ===" + '\033[0m\n')
         print("1. Login")
         print("2. Sign Up")
         print("3. Exit")
@@ -85,7 +85,7 @@ def main():
     # Show main menu after successful login
     while True:
         os.system("cls")
-        print("\n=== Social Network App ===\n")
+        print('\n\033[1m'"\033[4m" + "=== Social Network App ===" + '\033[0m\n')
 
         print(f"Welcome, {curr_user['name']}!\n")
 
