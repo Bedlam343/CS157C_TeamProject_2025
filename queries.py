@@ -35,7 +35,7 @@ def get_followers(tx, currentName):
     """
     Handles the query and runs the transaction to return the nodes that follow a user.
     """
-    query = """MATCH (p:User {name: $currentName})<-[:FOLLOWS]-(f:User) 
+    query = """MATCH (p:User {name: $currentName})-[:FOLLOWS]-(f:User) 
         RETURN f"""
     nodes = tx.run(query, currentName=currentName)
     return [node["f"]["name"] for node in nodes]
