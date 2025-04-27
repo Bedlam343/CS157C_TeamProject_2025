@@ -141,7 +141,7 @@ def execute_unfollow(currentName, targetName):
         print(f"Neo4j Error: {e.message}")
 
 # create user on sign up
-def create_user(tx, name, username, email, password):
+def create_user(tx, new_user):
     query = """
      MATCH (u:User)
     WHERE u.email = $email OR u.username = $username
@@ -153,37 +153,33 @@ def create_user(tx, name, username, email, password):
             email: $email, 
             username: $username, 
             password: $password,
+            bio: $bio,
+            location: $location,
             createdAt: datetime()
         })
         RETURN {message: "User created successfully", user: newUser, success: true} AS result',
         'RETURN {message: "Email or username already exists", user: null, success: false} AS result',
-        {name: $name, email: $email, username: $username, password: $password}
+        {name: $name, email: $email, username: $username, password: $password, bio: $bio, location: $location}
     ) YIELD value
     RETURN value.result AS result
     """
     
-    result = tx.run(query, name=name, username=username, email=email, password=password)
+    result = tx.run(query, name=new_user["name"], username=new_user["username"], email=new_user["email"], password=new_user["password"], bio=new_user["bio"], location=new_user["location"])
     record = result.single()
     return record["result"]
 
-def execute_create_user(name, username, email, password):
-    params = {
-        "name": name,
-        "username": username,
-        "email": email,
-        "password": password,
-    }
+def execute_create_user(new_user):
+    required_fields = ["name", "username", "email", "password"]
 
-    for field in params:
-        print(field, params[field], len(params[field]))
-        if len(params[field]) == 0:
+    for field in required_fields:
+        if len(new_user[field]) == 0:
             return f"Error: {field} cannot be empty", None
     
     try:
         driver = get_driver()
 
         with driver.session() as session:
-            result = session.execute_write(create_user, name, username, email, password)
+            result = session.execute_write(create_user, new_user)
             return result["message"], result["user"]
     except exceptions.Neo4jError as e:
         return f"Neo4j Error: {e.message}", None

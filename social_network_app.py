@@ -5,19 +5,22 @@ curr_user = {}
 
 def signup():
     print("\n=== Sign Up ===")
+    new_user = {}
     
-    name = input("Name: ")
-    username = input("Choose a username: ")
-    email = input("Email: ")
-    password = input("Choose a password: ")
+    new_user["name"] = input("Name: ")
+    new_user["username"] = input("Choose a username: ")
+    new_user["email"] = input("Email: ")
+    new_user["password"] = input("Choose a password: ")
+    new_user["bio"] = input("Add a bio (optional): ")
+    new_user["location"] = input("Add a location (optional): ")    
 
-    message, user = queries.execute_create_user(name, username, email, password)
+    message, res_user = queries.execute_create_user(new_user)
     print('\n', message)
 
-    if user is not None:
-        curr_user["name"] = name
-        curr_user["username"] = username
-        curr_user["email"] = email
+    if res_user is not None:
+        curr_user["name"] = new_user["name"]
+        curr_user["username"] = new_user["username"]
+        curr_user["email"] = new_user["email"]
         return True
 
     return False
