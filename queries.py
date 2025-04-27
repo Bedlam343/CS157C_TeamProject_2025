@@ -183,3 +183,36 @@ def execute_create_user(new_user):
             return result["message"], result["user"]
     except exceptions.Neo4jError as e:
         return f"Neo4j Error: {e.message}", None
+    
+def login(tx, username, password):
+    query = """
+    MATCH (u:User {username: $username})
+    WHERE u.password = $password
+    RETURN 
+        CASE 
+            WHEN u IS NOT NULL THEN 
+                {message: "Login successful", user: u, success: true}
+            ELSE 
+                {message: "Invalid username or password", user: null, success: false}
+        END AS result
+    """
+
+    result = tx.run(query, username=username, password=password)
+    record = result.single()
+    if record and record['result']:
+        return record['result']
+    else:
+        return { "message": "Invalid username or password", "user": None }
+
+def execute_login(username, password):
+    if len(username) == 0 or len(password) == 0:
+        return f"Error: username or password cannot be empty", None
+    
+    try:
+        driver = get_driver()
+
+        with driver.session() as session:
+            result = session.execute_read(login, username, password)
+            return result["message"], result["user"]
+    except exceptions.Neo4jError as e:
+        return f"Neo4j Error: {e.message}", None

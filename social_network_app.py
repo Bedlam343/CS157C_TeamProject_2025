@@ -30,8 +30,14 @@ def login():
     username = input("Username: ")
     password = input("Password: ")
 
-    curr_user['username'] = username
-    curr_user['password'] = password
+    message, u = queries.execute_login(username, password)
+    print('\n', message)
+
+    if u is not None:
+        curr_user['name'] = u['name']
+        curr_user['username'] = u['username']
+        curr_user['email'] = u['email']
+        return True
 
     return False
 
@@ -90,6 +96,9 @@ def main():
             pass
         elif choice == "2":
             pass
+        elif choice == "5":
+            followers = queries.execute_get_followers(currentName=curr_user["name"])
+            print(followers)
         elif choice == "10":
             print("Thank you, come again!")
             break
