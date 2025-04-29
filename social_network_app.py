@@ -97,9 +97,15 @@ def main():
             pass
         elif choice == "2":
             pass
+        elif choice == "3":
+            target_name = input("Enter the name of the user you'd like to follow: ")
+            queries.execute_follow(currentName=curr_user["name"], targetName=target_name)
         elif choice == "5":
             queries.execute_get_followers(currentName=curr_user["name"])
             queries.execute_get_following(currentName=curr_user["name"])
+        elif choice == "6":
+            target_name = input("Enter your friend's name to see mutuals: ")
+            queries.execute_get_mutuals(currentName=curr_user["name"], friendName=target_name)
         elif choice == "10":
             print("Thank you, come again!")
             break

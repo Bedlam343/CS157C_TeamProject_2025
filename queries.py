@@ -65,9 +65,11 @@ def get_mutuals(tx, currentName, friendName):
         Handles the query and runs the transaction to return the nodes that both the 
         user and the specified friend follows.
     """
-    query = """MATCH (p:User {name: $currentName})-[:FOLLOWS]->(f:User), (p2:User {name: $friendName})-[:FOLLOWS]->(f:User)
-        RETURN f"""
-    nodes = tx.run(query, name=currentName, friend=friendName)
+    query = """
+        MATCH (p:User {name: $currentName})-[:FOLLOWS]->(f:User), (p2:User {name: $friendName})-[:FOLLOWS]->(f:User)
+        RETURN f
+    """
+    nodes = tx.run(query, currentName=currentName, friendName=friendName)
     return [node["f"]["name"] for node in nodes]
 
 def execute_get_mutuals(currentName, friendName):
@@ -78,7 +80,7 @@ def execute_get_mutuals(currentName, friendName):
     try:
         driver = get_driver()
         with driver.session() as session:
-            mutuals = session.execute_read(get_mutuals, name=currentName, friend=friendName)
+            mutuals = session.execute_read(get_mutuals, currentName=currentName, friendName=friendName)
             print('\033[1m'"\033[4m" + "Your Mutual Friends:" + '\033[0m')
             if len(mutuals) == 0:
                 print("You have no mutual friends with this user.")
@@ -93,20 +95,27 @@ def execute_get_mutuals(currentName, friendName):
 def follow(tx, currentName, targetName):
     query = """ 
     MATCH (u:User {name: $currentName})
-    MATCH (u2:User {name: $targetName})
+    OPTIONAL MATCH (u2:User {name: $targetName})
+    WITH u, u2 WHERE u.name <> u2.name
     MERGE (u)-[:FOLLOWS]->(u2)
-    WHERE u.name <> u2.name
     RETURN u, u2
     """
-    result = tx.run(query, currentUser=currentName, targetUser=targetName)
-    return result
+    result = tx.run(query, currentName=currentName, targetName=targetName)
+    record = result.single()
+    if record and record["u2"]:
+        return record["u2"]["name"]
+    else:
+        return None
 
 def execute_follow(currentName, targetName):
     try:
         driver = get_driver()
         with driver.session() as session:
-            follow = session.execute_write(follow, currentName=currentName, targetName=targetName)
-            print(f"You are now following {targetName}!")
+            follow_result = session.execute_write(follow, currentName=currentName, targetName=targetName)
+            if follow_result is None or len(follow_result) == 0:
+                print(f"The user doesn't exist in the system. Please try again.")
+            else:
+                print(f"You are now following {targetName}!")
         driver.close()
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
