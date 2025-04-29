@@ -149,6 +149,30 @@ def execute_unfollow(currentName, targetUsername):
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
 
+# Search Users - A user can search for other users by name or username. The system returns a list of matching users.
+def search_users(tx, target):
+    query = """
+    MATCH (u:User) WHERE u.name = $target OR u.username = $target
+    RETURN u
+    """
+    result = tx.run(query, target=target)
+    return [node["u"] for node in result]
+
+def execute_search_users(target):
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            users = session.execute_read(search_users, target=target)
+            print('\n\033[1m'"\033[4m" + "Result for " + target + ":" + '\033[0m')
+            if len(users) == 0:
+                print("No users matched your search")
+            else:
+                for user in users:
+                    print(f"{user['name']} - {user['username']} - {user['bio']}")
+        driver.close()
+    except exceptions.Neo4jError as e:
+        print(f"Neo4j Error: {e.message}")
+
 # create user on sign up
 def create_user(tx, new_user):
     query = """

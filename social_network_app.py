@@ -109,6 +109,9 @@ def main():
         elif choice == "6":
             target_username = input("Enter your friend's username to see mutuals: ")
             queries.execute_get_mutuals(currentName=curr_user["name"], friendUsername=target_username)
+        elif choice == "8":
+            target = input("Search users by name or username: ")
+            queries.execute_search_users(target=target)
         elif choice == "10":
             print("Thank you, come again!")
             break
