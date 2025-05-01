@@ -44,6 +44,9 @@ def login():
         curr_user['name'] = u['name']
         curr_user['username'] = u['username']
         curr_user['email'] = u['email']
+        curr_user["bio"] = u["bio"]
+        curr_user["location"] = u["location"]
+        curr_user["password"] = u["password"]
         return True
 
     return False
@@ -120,7 +123,7 @@ def main():
 
                 if edit_choice == "1":
                     # edit name
-                    print("\n" + helpers.blue_text(f"Current Name: ") + curr_user['name'])
+                    print("\n" + helpers.blue_text("Current Name: ") + curr_user["name"])
                     new_name = input(helpers.bold_text("Enter new name: "))
 
                     success = queries.execute_update_name(curr_user["email"], new_name)
@@ -131,7 +134,7 @@ def main():
 
                 elif edit_choice == "2":
                     # edit username
-                    print("\n" + helpers.blue_text(f"Current Username: ") + curr_user['username'])
+                    print("\n" + helpers.blue_text("Current Username: ") + curr_user["username"])
                     new_username = input(helpers.bold_text("Enter new username: "))
 
                     success = queries.execute_update_username(curr_user["email"], new_username)
@@ -139,6 +142,18 @@ def main():
                     # update username locally if update successful
                     if success:
                         curr_user['username'] = new_username
+
+                elif edit_choice == "3":
+                    # change password
+                    print(curr_user)
+                    print("\n" + helpers.blue_text("Current Password: ") + curr_user["password"])
+                    new_password = input(helpers.bold_text("Enter new password: "))
+
+                    success = queries.execute_update_password(curr_user["email"], new_password)
+
+                    # update password locally if update successful
+                    if success:
+                        curr_user['password'] = new_password
                     
                 elif edit_choice == "6":
                     break

@@ -323,3 +323,35 @@ def execute_update_name(current_email, new_name):
     except exceptions.Neo4jError as e:
         helpers.print_error(f"Neo4j Error: {e.message}")
         return False
+    
+
+def update_password(tx, current_email, new_password):
+    query = """
+    MATCH (u:User {email: $current_email})
+    SET u.password = $new_password
+    RETURN u
+    """
+
+    result = tx.run(query, current_email=current_email, new_password=new_password)
+    record = result.single()
+
+    if record and record["u"]:
+        helpers.print_success("\nPassword updated successfully!")
+        return True
+    else:
+        helpers.print_error("\nAn error occurred")
+        return False
+
+def execute_update_password(current_email, new_password):
+    if len(new_password) == 0:
+        helpers.print_error("Error: Password cannot be empty!")
+        return False
+    
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            success = session.execute_write(update_password, current_email, new_password)
+            return success
+    except exceptions.Neo4jError as e:
+        helpers.print_error(f"Neo4j Error: {e.message}")
+        return False
