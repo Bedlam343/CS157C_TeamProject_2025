@@ -1,6 +1,6 @@
 from db_connection import get_driver
 from neo4j import exceptions
-import helpers
+from helpers import blue_text, bold_underline, print_error, print_success
 
 # View Friends/Connections - A user can see a list of people they are following.
 def get_following(tx, username): 
@@ -82,7 +82,7 @@ def execute_get_mutuals(currentUsername, friendUsername):
         driver = get_driver()
         with driver.session() as session:
             mutuals = session.execute_read(get_mutuals, currentUsername=currentUsername, friendUsername=friendUsername)
-            print(helpers.bold_underline("\nYour Mutual Friends:"))
+            print(bold_underline("\nYour Mutual Friends:"))
 
             if len(mutuals) == 0:
                 print("\nYou have no mutual friends with this user.")
@@ -116,9 +116,9 @@ def execute_follow(currentUsername, targetUsername):
         with driver.session() as session:
             follow_result = session.execute_write(follow, currentUsername=currentUsername, targetUsername=targetUsername)
             if follow_result is None or len(follow_result) == 0:
-                helpers.print_error("The user doesn't exist in the system. Please try again.")
+                print_error("The user doesn't exist in the system. Please try again.")
             else:
-                helpers.print_success(f"You are now following {targetUsername}!")
+                print_success(f"You are now following {targetUsername}!")
         driver.close()
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
@@ -145,9 +145,9 @@ def execute_unfollow(currentUsername, targetUsername):
         with driver.session() as session:
             unfollow_result = session.execute_write(unfollow, currentUsername=currentUsername, targetUsername=targetUsername)
             if unfollow_result:
-                helpers.print_success(f"You unfollowed {targetUsername}!")
+                print_success(f"You unfollowed {targetUsername}!")
             else:
-                helpers.print_error(f"Error: You don't follow {targetUsername}")
+                print_error(f"Error: You don't follow {targetUsername}")
         driver.close()
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
@@ -166,15 +166,15 @@ def execute_search_users(target):
         driver = get_driver()
         with driver.session() as session:
             users = session.execute_read(search_users, target=target)
-            print(f"\n{helpers.bold_underline(f'Results for {target}: ')}")
+            print(f"\n{bold_underline(f'Results for {target}: ')}")
 
             if len(users) == 0:
                 print("No users matched your search")
             else:
                 for user in users:
-                    output = f"{helpers.blue_text('Name')}: {user['name']} - {helpers.blue_text('Username')}: {user['username']}"
+                    output = f"{blue_text('Name')}: {user['name']} - {blue_text('Username')}: {user['username']}"
                     if len(user["bio"]) > 0:
-                        output += f" - {helpers.blue_text('Bio')}: {user['bio']}"
+                        output += f" - {blue_text('Bio')}: {user['bio']}"
                     print(output)
         driver.close()
     except exceptions.Neo4jError as e:
@@ -272,15 +272,15 @@ def update_username(tx, current_email, new_username):
     record = result.single()
 
     if record and record["u"]:
-        helpers.print_success("\nUsername updated successfully!")
+        print_success("\nUsername updated successfully!")
         return True
     else:
-        helpers.print_error("\nError: Username already taken!")
+        print_error("\nError: Username already taken!")
         return False
 
 def execute_update_username(current_email, new_username):
     if len(new_username) == 0:
-        helpers.print_error("Error: Username cannot be empty!")
+        print_error("Error: Username cannot be empty!")
         return False
     
     try:
@@ -289,7 +289,7 @@ def execute_update_username(current_email, new_username):
             success = session.execute_write(update_username, current_email, new_username)
             return success
     except exceptions.Neo4jError as e:
-        helpers.print_error(f"Neo4j Error: {e.message}")
+        print_error(f"Neo4j Error: {e.message}")
         return False
     
 
@@ -304,15 +304,15 @@ def update_name(tx, current_email, new_name):
     record = result.single()
 
     if record and record["u"]:
-        helpers.print_success("\nName updated successfully!")
+        print_success("\nName updated successfully!")
         return True
     else:
-        helpers.print_error("\nAn error occurred")
+        print_error("\nAn error occurred")
         return False
 
 def execute_update_name(current_email, new_name):
     if len(new_name) == 0:
-        helpers.print_error("Error: Name cannot be empty!")
+        print_error("Error: Name cannot be empty!")
         return False
     
     try:
@@ -321,7 +321,7 @@ def execute_update_name(current_email, new_name):
             success = session.execute_write(update_name, current_email, new_name)
             return success
     except exceptions.Neo4jError as e:
-        helpers.print_error(f"Neo4j Error: {e.message}")
+        print_error(f"Neo4j Error: {e.message}")
         return False
     
 
@@ -336,15 +336,15 @@ def update_password(tx, current_email, new_password):
     record = result.single()
 
     if record and record["u"]:
-        helpers.print_success("\nPassword updated successfully!")
+        print_success("\nPassword updated successfully!")
         return True
     else:
-        helpers.print_error("\nAn error occurred")
+        print_error("\nAn error occurred")
         return False
 
 def execute_update_password(current_email, new_password):
     if len(new_password) == 0:
-        helpers.print_error("Error: Password cannot be empty!")
+        print_error("Error: Password cannot be empty!")
         return False
     
     try:
@@ -353,7 +353,7 @@ def execute_update_password(current_email, new_password):
             success = session.execute_write(update_password, current_email, new_password)
             return success
     except exceptions.Neo4jError as e:
-        helpers.print_error(f"Neo4j Error: {e.message}")
+        print_error(f"Neo4j Error: {e.message}")
         return False
     
 def update_bio(tx, current_email, new_bio):
@@ -367,10 +367,10 @@ def update_bio(tx, current_email, new_bio):
     record = result.single()
 
     if record and record["u"]:
-        helpers.print_success("\nBio updated successfully!")
+        print_success("\nBio updated successfully!")
         return True
     else:
-        helpers.print_error("\nAn error occurred")
+        print_error("\nAn error occurred")
         return False
 def execute_update_bio(current_email, new_bio):
     try:
@@ -379,7 +379,7 @@ def execute_update_bio(current_email, new_bio):
             success = session.execute_write(update_bio, current_email, new_bio)
             return success
     except exceptions.Neo4jError as e:
-        helpers.print_error(f"Neo4j Error: {e.message}")
+        print_error(f"Neo4j Error: {e.message}")
         return False
     
 def update_location(tx, current_email, new_location):
@@ -393,10 +393,10 @@ def update_location(tx, current_email, new_location):
     record = result.single()
 
     if record and record["u"]:
-        helpers.print_success("\nLocation updated successfully!")
+        print_success("\nLocation updated successfully!")
         return True
     else:
-        helpers.print_error("\nAn error occurred")
+        print_error("\nAn error occurred")
         return False
 def execute_update_location(current_email, new_location):
     try:
@@ -405,5 +405,5 @@ def execute_update_location(current_email, new_location):
             success = session.execute_write(update_location, current_email, new_location)
             return success
     except exceptions.Neo4jError as e:
-        helpers.print_error(f"Neo4j Error: {e.message}")
+        print_error(f"Neo4j Error: {e.message}")
         return False

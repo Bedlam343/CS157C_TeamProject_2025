@@ -1,7 +1,7 @@
 import os
 import sys
 import queries
-import helpers
+from helpers import blue_text, bold_text, bold_underline, print_error
 
 curr_user = {}
 
@@ -68,12 +68,12 @@ def show_menu():
     print("\n10. Exit")
 
 def show_edit_user_menu():
-    print(helpers.bold_underline("Editing User:"))
-    print(f"1. Edit Name ({helpers.blue_text(curr_user['name'])})")
-    print(f"2. Edit Username ({helpers.blue_text(curr_user['username'])})")
-    print(f"3. Edit Password ({helpers.blue_text(curr_user['password'])})")
-    print(f"4. Edit Bio ({helpers.blue_text(curr_user['bio'])})")
-    print(f"5. Edit Location ({helpers.blue_text(curr_user['location'])})")
+    print(bold_underline("Editing User:"))
+    print(f"1. Edit Name ({blue_text(curr_user['name'])})")
+    print(f"2. Edit Username ({blue_text(curr_user['username'])})")
+    print(f"3. Edit Password ({blue_text(curr_user['password'])})")
+    print(f"4. Edit Bio ({blue_text(curr_user['bio'])})")
+    print(f"5. Edit Location ({blue_text(curr_user['location'])})")
     print("\n6. Main Menu")
 
 def main():
@@ -82,7 +82,7 @@ def main():
     authenticated = False
 
     while not authenticated:
-        print(f"\n{helpers.bold_underline('=== Social Network App ===')}\n")
+        print(f"\n{bold_underline('=== Social Network App ===')}\n")
         print("1. Login")
         print("2. Sign Up")
         print("3. Exit")
@@ -96,12 +96,12 @@ def main():
             print("Goodbye!")
             return
         else:
-            helpers.print_error("\nInvalid choice. Please try again.\n")
+            print_error("\nInvalid choice. Please try again.\n")
 
     # Show main menu after successful login
     while True:
         os.system("cls")
-        print(f"\n{helpers.bold_underline('=== Social Network App ===')}\n")
+        print(f"\n{bold_underline('=== Social Network App ===')}\n")
 
         print(f"Welcome, {curr_user['name']}!\n")
 
@@ -117,12 +117,12 @@ def main():
             while True:
                 os.system("cls")
                 show_edit_user_menu()
-                edit_choice = input(f"\n{helpers.bold_text('Choose action (1-6): ')}")
+                edit_choice = input(f"\n{bold_text('Choose action (1-6): ')}")
 
                 if edit_choice == "1":
                     # edit name
-                    print("\n" + helpers.blue_text("Current Name: ") + curr_user["name"])
-                    new_name = input(helpers.bold_text("Enter new name: "))
+                    print("\n" + blue_text("Current Name: ") + curr_user["name"])
+                    new_name = input(bold_text("Enter new name: "))
 
                     success = queries.execute_update_name(curr_user["email"], new_name)
 
@@ -132,8 +132,8 @@ def main():
 
                 elif edit_choice == "2":
                     # edit username
-                    print("\n" + helpers.blue_text("Current Username: ") + curr_user["username"])
-                    new_username = input(helpers.bold_text("Enter new username: "))
+                    print("\n" + blue_text("Current Username: ") + curr_user["username"])
+                    new_username = input(bold_text("Enter new username: "))
 
                     success = queries.execute_update_username(curr_user["email"], new_username)
 
@@ -143,8 +143,8 @@ def main():
 
                 elif edit_choice == "3":
                     # change password
-                    print("\n" + helpers.blue_text("Current Password: ") + curr_user["password"])
-                    new_password = input(helpers.bold_text("Enter new password: "))
+                    print("\n" + blue_text("Current Password: ") + curr_user["password"])
+                    new_password = input(bold_text("Enter new password: "))
 
                     success = queries.execute_update_password(curr_user["email"], new_password)
 
@@ -154,8 +154,8 @@ def main():
                 
                 elif edit_choice == "4":
                     # edit bio
-                    print("\n" + helpers.blue_text("Current Bio: ") + curr_user["bio"])
-                    new_bio = input(helpers.bold_text("Enter new bio: "))
+                    print("\n" + blue_text("Current Bio: ") + curr_user["bio"])
+                    new_bio = input(bold_text("Enter new bio: "))
 
                     success = queries.execute_update_bio(curr_user["email"], new_bio)
 
@@ -165,8 +165,8 @@ def main():
 
                 elif edit_choice == "5":
                     # edit location
-                    print("\n" + helpers.blue_text("Current Location: ") + curr_user["location"])
-                    new_location = input(helpers.bold_text("Enter new location: "))
+                    print("\n" + blue_text("Current Location: ") + curr_user["location"])
+                    new_location = input(bold_text("Enter new location: "))
 
                     success = queries.execute_update_location(curr_user["email"], new_location)
 
@@ -177,22 +177,22 @@ def main():
                 elif edit_choice == "6":
                     break
                 else:
-                    helpers.print_error("\nInvalid choice! Please try again...")
+                    print_error("\nInvalid choice! Please try again...")
                 
                 input("\nPress Enter to continue...")
         elif choice == "3":
             # follow another user
-            target_username = input(helpers.bold_text("\nEnter the username of the user you'd like to follow: "))
+            target_username = input(bold_text("\nEnter the username of the user you'd like to follow: "))
             if len(target_username) == 0:
-                helpers.print_error("Error: Username cannot be empty!")
+                print_error("Error: Username cannot be empty!")
             else:
                 queries.execute_follow(currentUsername=curr_user["username"], targetUsername=target_username)
 
         elif choice == "4":
             # unfollow another user
-            target_username = input(helpers.bold_text("\nEnter the username of the user you'd like to unfollow: "))
+            target_username = input(bold_text("\nEnter the username of the user you'd like to unfollow: "))
             if len(target_username) == 0:
-                helpers.print_error("Username cannot be empty!")
+                print_error("Username cannot be empty!")
             else:
                 queries.execute_unfollow(currentUsername=curr_user["username"], targetUsername=target_username)
 
@@ -203,9 +203,9 @@ def main():
 
         elif choice == "6":
             # see mutuals with a connection
-            target_username = input("\n" + helpers.bold_text("Enter your friend's username to see mutuals: "))
+            target_username = input("\n" + bold_text("Enter your friend's username to see mutuals: "))
             if len(target_username) == 0:
-                 helpers.print_error("Username cannot be empty!")
+                 print_error("Username cannot be empty!")
             else:
                 queries.execute_get_mutuals(currentUsername=curr_user["username"], friendUsername=target_username)
 
@@ -215,9 +215,9 @@ def main():
 
         elif choice == "8":
             # search users
-            target = input("\n" + helpers.bold_text("Search users by name or username: "))
+            target = input("\n" + bold_text("Search users by name or username: "))
             if len(target) == 0:
-                helpers.print_error("\nInput cannot be empty!")
+                print_error("\nInput cannot be empty!")
             else:
                 queries.execute_search_users(target=target) 
 
@@ -230,7 +230,7 @@ def main():
             break
 
         else:
-            helpers.print_error("\nInvalid choice. Please try again.")
+            print_error("\nInvalid choice. Please try again.")
 
         input("\nPress Enter to continue...")
 
