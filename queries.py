@@ -2,16 +2,16 @@ from db_connection import get_driver
 from neo4j import exceptions
 
 # View Friends/Connections - A user can see a list of people they are following.
-def get_following(tx, currentName): 
+def get_following(tx, username): 
     """
     Handles the query and runs the transaction to return the nodes a user is following.
     """
-    query = """MATCH (p:User {name: $currentName})-[:FOLLOWS]->(f:User) 
+    query = """MATCH (p:User {username: $username})-[:FOLLOWS]->(f:User) 
         RETURN f"""
-    nodes = tx.run(query, currentName=currentName)
+    nodes = tx.run(query, username=username)
     return [node["f"] for node in nodes]
 
-def execute_get_following(currentName):
+def execute_get_following(username):
     """
     Manages the DB session, executes the get_following() query, and stylizes the output.
     Call this function in other files to return a user's following.
@@ -19,7 +19,7 @@ def execute_get_following(currentName):
     try:
         driver = get_driver()
         with driver.session() as session:
-            followed = session.execute_read(get_following, currentName=currentName)
+            followed = session.execute_read(get_following, username=username)
             print('\n\033[1m'"\033[4m" + "Your Following List:" + '\033[0m')
             if len(followed) == 0:
                 print("You are currently not following any users.")
@@ -31,16 +31,16 @@ def execute_get_following(currentName):
         print(f"Neo4j Error: {e.message}")
 
 # View Friends/Connections - A user can see a list of people who follow them.
-def get_followers(tx, currentName):
+def get_followers(tx, username):
     """
     Handles the query and runs the transaction to return the nodes that follow a user.
     """
-    query = """MATCH (p:User {name: $currentName})<-[:FOLLOWS]-(f:User) 
+    query = """MATCH (p:User {username: $username})<-[:FOLLOWS]-(f:User) 
         RETURN f"""
-    nodes = tx.run(query, currentName=currentName)
+    nodes = tx.run(query, username=username)
     return [node["f"] for node in nodes]
 
-def execute_get_followers(currentName):
+def execute_get_followers(username):
     """
     Manages the DB session, executes the get_followers() query, and stylizes the output.
     Call this function in other files to return a user's followers.
@@ -48,7 +48,7 @@ def execute_get_followers(currentName):
     try:
         driver = get_driver()
         with driver.session() as session:
-            followers = session.execute_read(get_followers, currentName=currentName)
+            followers = session.execute_read(get_followers, username=username)
             print('\n\033[1m'"\033[4m" + "Your Followers:" + '\033[0m')
             if len(followers) == 0:
                 print("You currently have no users following you.")

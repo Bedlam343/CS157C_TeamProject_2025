@@ -4,6 +4,8 @@ import queries
 
 curr_user = {}
 
+
+
 def signup():
     print("\n=== Sign Up ===")
     new_user = {}
@@ -104,8 +106,8 @@ def main():
             target_username = input("Enter the username of the user you'd like to unfollow: ")
             queries.execute_unfollow(currentName=curr_user["name"], targetUsername=target_username)
         elif choice == "5":
-            queries.execute_get_followers(currentName=curr_user["name"])
-            queries.execute_get_following(currentName=curr_user["name"])
+            queries.execute_get_followers(username=curr_user["username"])
+            queries.execute_get_following(username=curr_user["username"])
         elif choice == "6":
             target_username = input("Enter your friend's username to see mutuals: ")
             queries.execute_get_mutuals(currentName=curr_user["name"], friendUsername=target_username)
