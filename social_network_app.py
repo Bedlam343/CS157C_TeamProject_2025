@@ -115,12 +115,17 @@ def main():
                 queries.execute_unfollow(currentUsername=curr_user["username"], targetUsername=target_username)
 
         elif choice == "5":
+            # get following anf followers
             queries.execute_get_followers(username=curr_user["username"])
             queries.execute_get_following(username=curr_user["username"])
 
         elif choice == "6":
-            target_username = input("Enter your friend's username to see mutuals: ")
-            queries.execute_get_mutuals(currentName=curr_user["name"], friendUsername=target_username)
+            # see mutuals with a connection
+            target_username = input("\n" + helpers.bold_text("Enter your friend's username to see mutuals: "))
+            if len(target_username) == 0:
+                 helpers.print_error("Username cannot be empty!")
+            else:
+                queries.execute_get_mutuals(currentUsername=curr_user["username"], friendUsername=target_username)
 
         elif choice == "8":
             target = input("Search users by name or username: ")

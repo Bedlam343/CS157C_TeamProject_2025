@@ -61,19 +61,19 @@ def execute_get_followers(username):
         print(f"Neo4j Error: {e.message}")
 
 # View Mutual Connections - A user can see mutual friends (users followed by both parties).
-def get_mutuals(tx, currentName, friendUsername):
+def get_mutuals(tx, currentUsername, friendUsername):
     """
         Handles the query and runs the transaction to return the nodes that both the 
         user and the specified friend follows.
     """
     query = """
-        MATCH (p:User {name: $currentName})-[:FOLLOWS]->(f:User), (p2:User {username: $friendUsername})-[:FOLLOWS]->(f:User)
+        MATCH (p:User {username: $currentUsername})-[:FOLLOWS]->(f:User), (p2:User {username: $friendUsername})-[:FOLLOWS]->(f:User)
         RETURN f
     """
-    nodes = tx.run(query, currentName=currentName, friendUsername=friendUsername)
+    nodes = tx.run(query, currentUsername=currentUsername, friendUsername=friendUsername)
     return [node["f"] for node in nodes]
 
-def execute_get_mutuals(currentName, friendUsername):
+def execute_get_mutuals(currentUsername, friendUsername):
     """
     Manages the DB session, executes the get_mutuals() query, and stylizes the output.
     Call this function in other files to return a user's mutuals friends with another user.
@@ -81,10 +81,11 @@ def execute_get_mutuals(currentName, friendUsername):
     try:
         driver = get_driver()
         with driver.session() as session:
-            mutuals = session.execute_read(get_mutuals, currentName=currentName, friendUsername=friendUsername)
-            print('\033[1m'"\033[4m" + "Your Mutual Friends:" + '\033[0m')
+            mutuals = session.execute_read(get_mutuals, currentUsername=currentUsername, friendUsername=friendUsername)
+            print(helpers.bold_underline("\nYour Mutual Friends:"))
+
             if len(mutuals) == 0:
-                print("You have no mutual friends with this user.")
+                print("\nYou have no mutual friends with this user.")
             else:
                 for user in mutuals:
                     print(f"{user['name']} - {user['username']}")
@@ -115,7 +116,7 @@ def execute_follow(currentUsername, targetUsername):
         with driver.session() as session:
             follow_result = session.execute_write(follow, currentUsername=currentUsername, targetUsername=targetUsername)
             if follow_result is None or len(follow_result) == 0:
-                print("\n\033[31m" + "The user doesn't exist in the system. Please try again." + "\033[0m")
+                helpers.print_error("The user doesn't exist in the system. Please try again.")
             else:
                 helpers.print_success(f"You are now following {targetUsername}!")
         driver.close()
