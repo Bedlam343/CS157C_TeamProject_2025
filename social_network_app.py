@@ -145,7 +145,6 @@ def main():
 
                 elif edit_choice == "3":
                     # change password
-                    print(curr_user)
                     print("\n" + helpers.blue_text("Current Password: ") + curr_user["password"])
                     new_password = input(helpers.bold_text("Enter new password: "))
 
@@ -154,6 +153,22 @@ def main():
                     # update password locally if update successful
                     if success:
                         curr_user['password'] = new_password
+                
+                elif edit_choice == "4":
+                    # edit bio
+                    print("\n" + helpers.blue_text("Current Bio: ") + curr_user["bio"])
+                    new_bio = input(helpers.bold_text("Enter new bio: "))
+
+                    success = queries.execute_update_bio(curr_user["email"], new_bio)
+
+                    # update bio locally if update successful
+                    if success:
+                        curr_user['bio'] = new_bio
+                    pass
+
+                elif edit_choice == "5":
+                    # edit location
+                    pass
                     
                 elif edit_choice == "6":
                     break

@@ -355,3 +355,29 @@ def execute_update_password(current_email, new_password):
     except exceptions.Neo4jError as e:
         helpers.print_error(f"Neo4j Error: {e.message}")
         return False
+    
+def update_bio(tx, current_email, new_bio):
+    query = """
+    MATCH (u:User {email: $current_email})
+    SET u.bio = $new_bio
+    RETURN u
+    """
+
+    result = tx.run(query, current_email=current_email, new_bio=new_bio)
+    record = result.single()
+
+    if record and record["u"]:
+        helpers.print_success("\nBio updated successfully!")
+        return True
+    else:
+        helpers.print_error("\nAn error occurred")
+        return False
+def execute_update_bio(current_email, new_bio):
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            success = session.execute_write(update_bio, current_email, new_bio)
+            return success
+    except exceptions.Neo4jError as e:
+        helpers.print_error(f"Neo4j Error: {e.message}")
+        return False
