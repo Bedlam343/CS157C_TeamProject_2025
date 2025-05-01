@@ -118,7 +118,19 @@ def main():
                 show_edit_user_menu()
                 edit_choice = input(f"\n{helpers.bold_text('Choose action (1-6): ')}")
 
-                if edit_choice == "2":
+                if edit_choice == "1":
+                    # edit name
+                    print("\n" + helpers.blue_text(f"Current Name: ") + curr_user['name'])
+                    new_name = input(helpers.bold_text("Enter new name: "))
+
+                    success = queries.execute_update_name(curr_user["email"], new_name)
+
+                    # update name locally if update successful
+                    if success:
+                        curr_user['name'] = new_name
+
+                elif edit_choice == "2":
+                    # edit username
                     print("\n" + helpers.blue_text(f"Current Username: ") + curr_user['username'])
                     new_username = input(helpers.bold_text("Enter new username: "))
 

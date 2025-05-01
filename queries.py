@@ -291,3 +291,35 @@ def execute_update_username(current_email, new_username):
     except exceptions.Neo4jError as e:
         helpers.print_error(f"Neo4j Error: {e.message}")
         return False
+    
+
+def update_name(tx, current_email, new_name):
+    query = """
+    MATCH (u:User {email: $current_email})
+    SET u.name = $new_name
+    RETURN u
+    """
+
+    result = tx.run(query, current_email=current_email, new_name=new_name)
+    record = result.single()
+
+    if record and record["u"]:
+        helpers.print_success("\nName updated successfully!")
+        return True
+    else:
+        helpers.print_error("\nAn error occurred")
+        return False
+
+def execute_update_name(current_email, new_name):
+    if len(new_name) == 0:
+        helpers.print_error("Error: Name cannot be empty!")
+        return False
+    
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            success = session.execute_write(update_name, current_email, new_name)
+            return success
+    except exceptions.Neo4jError as e:
+        helpers.print_error(f"Neo4j Error: {e.message}")
+        return False
