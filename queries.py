@@ -393,7 +393,7 @@ def update_location(tx, current_email, new_location):
     record = result.single()
 
     if record and record["u"]:
-        helpers.print_success("\Location updated successfully!")
+        helpers.print_success("\nLocation updated successfully!")
         return True
     else:
         helpers.print_error("\nAn error occurred")
