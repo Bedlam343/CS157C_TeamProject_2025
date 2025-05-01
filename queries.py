@@ -1,5 +1,6 @@
 from db_connection import get_driver
 from neo4j import exceptions
+import helpers
 
 # View Friends/Connections - A user can see a list of people they are following.
 def get_following(tx, username): 
@@ -92,59 +93,60 @@ def execute_get_mutuals(currentName, friendUsername):
         print(f"Neo4j Error: {e.message}")
 
 # Follow Another User - A user can follow another user, creating a "FOLLOWS" relationship in Neo4j.
-def follow(tx, currentName, targetUsername):
+def follow(tx, currentUsername, targetUsername):
     query = """ 
-    MATCH (u:User {name: $currentName})
+    MATCH (u:User {username: $currentUsername})
     OPTIONAL MATCH (u2:User {username: $targetUsername})
-    WITH u, u2 WHERE u.name <> u2.name
+    WITH u, u2 WHERE u.username <> u2.username
     MERGE (u)-[:FOLLOWS]->(u2)
     RETURN u, u2
     """
-    result = tx.run(query, currentName=currentName, targetUsername=targetUsername)
+    result = tx.run(query, currentUsername=currentUsername, targetUsername=targetUsername)
     record = result.single()
     if record and record["u2"]:
         return record["u2"]["username"]
     else:
         return None
 
-def execute_follow(currentName, targetUsername):
+# TODO: What if already following targetUsername?
+def execute_follow(currentUsername, targetUsername):
     try:
         driver = get_driver()
         with driver.session() as session:
-            follow_result = session.execute_write(follow, currentName=currentName, targetUsername=targetUsername)
+            follow_result = session.execute_write(follow, currentUsername=currentUsername, targetUsername=targetUsername)
             if follow_result is None or len(follow_result) == 0:
-                print(f"The user doesn't exist in the system. Please try again.")
+                print("\n\033[31m" + "The user doesn't exist in the system. Please try again." + "\033[0m")
             else:
-                print(f"You are now following {targetUsername}!")
+                helpers.print_success(f"You are now following {targetUsername}!")
         driver.close()
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
 
 # Unfollow a User - A user can unfollow another user, removing the "FOLLOWS" relationship.
-def unfollow(tx, currentName, targetUsername):
+def unfollow(tx, currentUsername, targetUsername):
     query = """ 
-    MATCH (u:User {name: $currentName})
+    MATCH (u:User {username: $currentUsername})
     MATCH (u2:User {username: $targetUsername})
     MATCH (u)-[f:FOLLOWS]->(u2)
     DELETE f
     RETURN COUNT(f) AS deleted
     """
-    result = tx.run(query, currentName=currentName, targetUsername=targetUsername)
+    result = tx.run(query, currentUsername=currentUsername, targetUsername=targetUsername)
     record = result.single()
     if record:
         return record["deleted"] > 0
     else:
         return False
 
-def execute_unfollow(currentName, targetUsername):
+def execute_unfollow(currentUsername, targetUsername):
     try:
         driver = get_driver()
         with driver.session() as session:
-            unfollow_result = session.execute_write(unfollow, currentName=currentName, targetUsername=targetUsername)
+            unfollow_result = session.execute_write(unfollow, currentUsername=currentUsername, targetUsername=targetUsername)
             if unfollow_result:
-                print(f"You unfollowed {targetUsername}!")
+                helpers.print_success(f"You unfollowed {targetUsername}!")
             else:
-                print(f"You aren't following {targetUsername} yet.")
+                helpers.print_error(f"Error: You don't follow {targetUsername}")
         driver.close()
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")

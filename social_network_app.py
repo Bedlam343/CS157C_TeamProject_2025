@@ -1,10 +1,9 @@
 import os
 import sys
 import queries
+import helpers
 
 curr_user = {}
-
-
 
 def signup():
     print("\n=== Sign Up ===")
@@ -100,23 +99,37 @@ def main():
         elif choice == "2":
             pass
         elif choice == "3":
-            target_username = input("Enter the username of the user you'd like to follow: ")
-            queries.execute_follow(currentName=curr_user["name"], targetUsername=target_username)
+            # follow another user
+            target_username = input(helpers.bold_text("\nEnter the username of the user you'd like to follow: "))
+            if len(target_username) == 0:
+                helpers.print_error("Error: Username cannot be empty!")
+            else:
+                queries.execute_follow(currentUsername=curr_user["username"], targetUsername=target_username)
+
         elif choice == "4":
-            target_username = input("Enter the username of the user you'd like to unfollow: ")
-            queries.execute_unfollow(currentName=curr_user["name"], targetUsername=target_username)
+            # unfollow another user
+            target_username = input(helpers.bold_text("\nEnter the username of the user you'd like to unfollow: "))
+            if len(target_username) == 0:
+                helpers.print_error("Username cannot be empty!")
+            else:
+                queries.execute_unfollow(currentUsername=curr_user["username"], targetUsername=target_username)
+
         elif choice == "5":
             queries.execute_get_followers(username=curr_user["username"])
             queries.execute_get_following(username=curr_user["username"])
+
         elif choice == "6":
             target_username = input("Enter your friend's username to see mutuals: ")
             queries.execute_get_mutuals(currentName=curr_user["name"], friendUsername=target_username)
+
         elif choice == "8":
             target = input("Search users by name or username: ")
             queries.execute_search_users(target=target)
+
         elif choice == "10":
             print("Thank you, come again!")
             break
+
         else:
             print("Invalid choice. Please try again.")
 
