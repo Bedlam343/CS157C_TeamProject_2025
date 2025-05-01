@@ -71,11 +71,11 @@ def show_menu():
 
 def show_edit_user_menu():
     print(helpers.bold_underline("Editing User:"))
-    print("1. Edit Name")
-    print("2. Edit Username")
-    print("3. Edit Password")
-    print("4. Edit Bio")
-    print("5. Edit Location")
+    print(f"1. Edit Name ({helpers.blue_text(curr_user['name'])})")
+    print(f"2. Edit Username ({helpers.blue_text(curr_user['username'])})")
+    print(f"3. Edit Password ({helpers.blue_text(curr_user['password'])})")
+    print(f"4. Edit Bio ({helpers.blue_text(curr_user['bio'])})")
+    print(f"5. Edit Location ({helpers.blue_text(curr_user['location'])})")
     print("\n6. Main Menu")
 
 def main():
@@ -164,11 +164,17 @@ def main():
                     # update bio locally if update successful
                     if success:
                         curr_user['bio'] = new_bio
-                    pass
 
                 elif edit_choice == "5":
                     # edit location
-                    pass
+                    print("\n" + helpers.blue_text("Current Location: ") + curr_user["location"])
+                    new_location = input(helpers.bold_text("Enter new location: "))
+
+                    success = queries.execute_update_location(curr_user["email"], new_location)
+
+                    # update location locally if update successful
+                    if success:
+                        curr_user['location'] = new_location
                     
                 elif edit_choice == "6":
                     break

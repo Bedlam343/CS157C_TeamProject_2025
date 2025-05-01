@@ -381,3 +381,29 @@ def execute_update_bio(current_email, new_bio):
     except exceptions.Neo4jError as e:
         helpers.print_error(f"Neo4j Error: {e.message}")
         return False
+    
+def update_location(tx, current_email, new_location):
+    query = """
+    MATCH (u:User {email: $current_email})
+    SET u.location = $new_location
+    RETURN u
+    """
+
+    result = tx.run(query, current_email=current_email, new_location=new_location)
+    record = result.single()
+
+    if record and record["u"]:
+        helpers.print_success("\Location updated successfully!")
+        return True
+    else:
+        helpers.print_error("\nAn error occurred")
+        return False
+def execute_update_location(current_email, new_location):
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            success = session.execute_write(update_location, current_email, new_location)
+            return success
+    except exceptions.Neo4jError as e:
+        helpers.print_error(f"Neo4j Error: {e.message}")
+        return False
