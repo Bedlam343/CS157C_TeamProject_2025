@@ -1,6 +1,6 @@
 from db_connection import get_driver
 from neo4j import exceptions
-from helpers import blue_text, bold_underline, print_error, print_success
+from helpers import blue_text, orange_text, bold_underline, print_error, print_success
 
 # View Friends/Connections - A user can see a list of people they are following.
 def get_following(tx, username): 
@@ -449,6 +449,55 @@ def execute_get_recommendations(current_username):
                         output += f" - {blue_text('Bio')}: {user['bio']}"
                     print(output)
         driver.close()
+    except exceptions.Neo4jError as e:
+        print_error(f"Neo4j Error: {e.message}")
+        return
+    
+def get_most_followed(tx):
+    query = """
+    MATCH (u:User)
+    OPTIONAL MATCH (follower:User)-[:FOLLOWS]->(u)
+    RETURN u {.*, password: null, id: null} AS user, count(follower) AS followersCount
+    ORDER BY followersCount DESC
+    LIMIT 10
+    """
+
+    result = tx.run(query)
+    return [{ "user": node["user"], "num_followers": node["followersCount"] } for node in result]
+
+def execute_get_most_followed():
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            most_followed = session.execute_read(get_most_followed)
+            
+            print(f"\n{bold_underline(f'Top 10 most followed users: ')}")
+
+            if len(most_followed) == 0:
+                 print("No users found.")
+            else:
+                count = 1
+                for item in most_followed:
+                    user = item['user']
+                    num_followers = item['num_followers']
+                    output = ''
+                    i = 0
+                   
+                    print(orange_text(f"{count}. {num_followers} followers"))
+
+                    for key in user:
+                        if user[key] is not None:
+                            if i > 0:
+                                output += " - "
+                            output += f"{blue_text(key)}: {user[key]}"
+                            i += 1
+
+                    print(output)
+                    print()
+                    count += 1
+
+            driver.close()
+
     except exceptions.Neo4jError as e:
         print_error(f"Neo4j Error: {e.message}")
         return

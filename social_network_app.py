@@ -107,7 +107,7 @@ def main():
 
         show_menu()
 
-        choice = input("Choose an option (1-10): ")
+        choice = input("\n" + bold_text("Choose an option (1-10): "))
 
         if choice == "1":
            pass
@@ -223,7 +223,7 @@ def main():
 
         elif choice == "9":
             # explore popular users
-            pass
+            queries.execute_get_most_followed()
 
         elif choice == "10":
             print("Thank you, come again!")

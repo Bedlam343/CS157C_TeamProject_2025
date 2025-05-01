@@ -7,6 +7,9 @@ def print_success(msg):
 def blue_text(text):
   return f"\033[34m{text}\033[0m"
 
+def orange_text(text):
+  return f"\033[38;5;208m{text}\033[0m"
+
 def bold_text(text):
   return f"\033[1m{text}\033[0m"
 
