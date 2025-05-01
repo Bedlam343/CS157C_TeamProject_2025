@@ -220,6 +220,7 @@ def execute_create_user(new_user):
 
         with driver.session() as session:
             result = session.execute_write(create_user, new_user)
+            driver.close()
             return result["message"], result["user"]
     except exceptions.Neo4jError as e:
         return f"Neo4j Error: {e.message}", None
@@ -253,6 +254,7 @@ def execute_login(username, password):
 
         with driver.session() as session:
             result = session.execute_read(login, username, password)
+            driver.close()
             return result["message"], result["user"]
     except exceptions.Neo4jError as e:
         return f"Neo4j Error: {e.message}", None
@@ -287,6 +289,7 @@ def execute_update_username(current_email, new_username):
         driver = get_driver()
         with driver.session() as session:
             success = session.execute_write(update_username, current_email, new_username)
+            driver.close()
             return success
     except exceptions.Neo4jError as e:
         print_error(f"Neo4j Error: {e.message}")
@@ -319,6 +322,7 @@ def execute_update_name(current_email, new_name):
         driver = get_driver()
         with driver.session() as session:
             success = session.execute_write(update_name, current_email, new_name)
+            driver.close()
             return success
     except exceptions.Neo4jError as e:
         print_error(f"Neo4j Error: {e.message}")
@@ -351,6 +355,7 @@ def execute_update_password(current_email, new_password):
         driver = get_driver()
         with driver.session() as session:
             success = session.execute_write(update_password, current_email, new_password)
+            driver.close()
             return success
     except exceptions.Neo4jError as e:
         print_error(f"Neo4j Error: {e.message}")
@@ -377,6 +382,7 @@ def execute_update_bio(current_email, new_bio):
         driver = get_driver()
         with driver.session() as session:
             success = session.execute_write(update_bio, current_email, new_bio)
+            driver.close()
             return success
     except exceptions.Neo4jError as e:
         print_error(f"Neo4j Error: {e.message}")
@@ -403,7 +409,46 @@ def execute_update_location(current_email, new_location):
         driver = get_driver()
         with driver.session() as session:
             success = session.execute_write(update_location, current_email, new_location)
+            driver.close()
             return success
     except exceptions.Neo4jError as e:
         print_error(f"Neo4j Error: {e.message}")
         return False
+    
+def get_recommendations(tx, current_username):
+    query = """
+    MATCH (me:User {username: $current_username})-[:FOLLOWS]-(friend)-[:FOLLOWS]-(suggestion:User)
+    WHERE NOT (me)-[:FOLLOWS]-(suggestion)
+    AND me <> suggestion
+    RETURN DISTINCT suggestion, count(friend) AS mutualConnections
+    ORDER BY mutualConnections DESC
+    LIMIT 10
+    """
+
+    result = tx.run(query, current_username=current_username)
+    return [node["suggestion"] for node in result]
+
+def execute_get_recommendations(current_username):
+    if len(current_username) == 0:
+        print_error("Username cannot be empty!")
+        return
+    
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            recommendations = session.execute_read(get_recommendations, current_username)
+
+            print(f"\n{bold_underline(f'Recommendations: ')}")
+
+            if len(recommendations) == 0:
+                print("No recommendations found.")
+            else:
+                for user in recommendations:
+                    output = f"{blue_text('Name')}: {user['name']} - {blue_text('Username')}: {user['username']}"
+                    if len(user["bio"]) > 0:
+                        output += f" - {blue_text('Bio')}: {user['bio']}"
+                    print(output)
+        driver.close()
+    except exceptions.Neo4jError as e:
+        print_error(f"Neo4j Error: {e.message}")
+        return

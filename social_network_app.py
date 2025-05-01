@@ -100,7 +100,7 @@ def main():
 
     # Show main menu after successful login
     while True:
-        os.system("cls")
+        # os.system("cls")
         print(f"\n{bold_underline('=== Social Network App ===')}\n")
 
         print(f"Welcome, {curr_user['name']}!\n")
@@ -211,7 +211,7 @@ def main():
 
         elif choice == "7":
             # friend recommendations
-            pass
+            queries.execute_get_recommendations(curr_user['username'])
 
         elif choice == "8":
             # search users
