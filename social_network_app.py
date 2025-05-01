@@ -5,8 +5,6 @@ import helpers
 
 curr_user = {}
 
-# bonnyandrew502
-
 def signup():
     print("\n=== Sign Up ===")
     new_user = {}
