@@ -67,7 +67,7 @@ def main():
     authenticated = False
 
     while not authenticated:
-        print('\033[1m'"\033[4m" + "=== Social Network App ===" + '\033[0m\n')
+        print(f"\n{helpers.bold_underline('=== Social Network App ===')}\n")
         print("1. Login")
         print("2. Sign Up")
         print("3. Exit")
@@ -86,7 +86,7 @@ def main():
     # Show main menu after successful login
     while True:
         os.system("cls")
-        print('\n\033[1m'"\033[4m" + "=== Social Network App ===" + '\033[0m\n')
+        print(f"\n{helpers.bold_underline('=== Social Network App ===')}\n")
 
         print(f"Welcome, {curr_user['name']}!\n")
 
@@ -127,9 +127,21 @@ def main():
             else:
                 queries.execute_get_mutuals(currentUsername=curr_user["username"], friendUsername=target_username)
 
+        elif choice == "7":
+            # friend recommendations
+            pass
+
         elif choice == "8":
-            target = input("Search users by name or username: ")
-            queries.execute_search_users(target=target)
+            # search users
+            target = input("\n" + helpers.bold_text("Search users by name or username: "))
+            if len(target) == 0:
+                helpers.print_error("\nInput cannot be empty!")
+            else:
+                queries.execute_search_users(target=target) 
+
+        elif choice == "9":
+            # explore popular users
+            pass
 
         elif choice == "10":
             print("Thank you, come again!")

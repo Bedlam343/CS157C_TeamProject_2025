@@ -166,12 +166,16 @@ def execute_search_users(target):
         driver = get_driver()
         with driver.session() as session:
             users = session.execute_read(search_users, target=target)
-            print('\n\033[1m'"\033[4m" + "Result for " + target + ":" + '\033[0m')
+            print(f"\n{helpers.bold_underline(f'Results for {target}: ')}")
+
             if len(users) == 0:
                 print("No users matched your search")
             else:
                 for user in users:
-                    print(f"{user['name']} - {user['username']} - {user['bio']}")
+                    output = f"{helpers.blue_text('Name')}: {user['name']} - {helpers.blue_text('Username')}: {user['username']}"
+                    if len(user["bio"]) > 0:
+                        output += f" - {helpers.blue_text('Bio')}: {user['bio']}"
+                    print(output)
         driver.close()
     except exceptions.Neo4jError as e:
         print(f"Neo4j Error: {e.message}")
