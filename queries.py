@@ -256,3 +256,38 @@ def execute_login(username, password):
             return result["message"], result["user"]
     except exceptions.Neo4jError as e:
         return f"Neo4j Error: {e.message}", None
+    
+
+def update_username(tx, current_email, new_username):
+    query = """
+    OPTIONAL MATCH (existing:User {username: $new_username})
+    WITH existing
+    WHERE existing IS NULL
+    MATCH (u:User {email: $current_email})
+    SET u.username = $new_username
+    RETURN u
+    """
+
+    result = tx.run(query, current_email=current_email, new_username=new_username)
+    record = result.single()
+
+    if record and record["u"]:
+        helpers.print_success("\nUsername updated successfully!")
+        return True
+    else:
+        helpers.print_error("\nError: Username already taken!")
+        return False
+
+def execute_update_username(current_email, new_username):
+    if len(new_username) == 0:
+        helpers.print_error("Error: Username cannot be empty!")
+        return False
+    
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            success = session.execute_write(update_username, current_email, new_username)
+            return success
+    except exceptions.Neo4jError as e:
+        helpers.print_error(f"Neo4j Error: {e.message}")
+        return False

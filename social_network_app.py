@@ -5,6 +5,8 @@ import helpers
 
 curr_user = {}
 
+# bonnyandrew502
+
 def signup():
     print("\n=== Sign Up ===")
     new_user = {}
@@ -23,6 +25,9 @@ def signup():
         curr_user["name"] = new_user["name"]
         curr_user["username"] = new_user["username"]
         curr_user["email"] = new_user["email"]
+        curr_user["bio"] = new_user["bio"]
+        curr_user["location"] = new_user["location"]
+        curr_user["password"] = new_user["password"]
         return True
 
     return False
@@ -61,6 +66,15 @@ def show_menu():
 
     print("\n10. Exit")
 
+def show_edit_user_menu():
+    print(helpers.bold_underline("Editing User:"))
+    print("1. Edit Name")
+    print("2. Edit Username")
+    print("3. Edit Password")
+    print("4. Edit Bio")
+    print("5. Edit Location")
+    print("\n6. Main Menu")
+
 def main():
     os.system("cls")
     global curr_user
@@ -81,7 +95,7 @@ def main():
             print("Goodbye!")
             return
         else:
-            print("Invalid choice. Please try again.\n")
+            helpers.print_error("\nInvalid choice. Please try again.\n")
 
     # Show main menu after successful login
     while True:
@@ -95,9 +109,31 @@ def main():
         choice = input("Choose an option (1-10): ")
 
         if choice == "1":
-            pass
+           pass
+            
         elif choice == "2":
-            pass
+            # edit user profile
+            while True:
+                os.system("cls")
+                show_edit_user_menu()
+                edit_choice = input(f"\n{helpers.bold_text('Choose action (1-6): ')}")
+
+                if edit_choice == "2":
+                    print("\n" + helpers.blue_text(f"Current Username: ") + curr_user['username'])
+                    new_username = input(helpers.bold_text("Enter new username: "))
+
+                    success = queries.execute_update_username(curr_user["email"], new_username)
+
+                    # update username locally if update successful
+                    if success:
+                        curr_user['username'] = new_username
+                    
+                elif edit_choice == "6":
+                    break
+                else:
+                    helpers.print_error("\nInvalid choice! Please try again...")
+                
+                input("\nPress Enter to continue...")
         elif choice == "3":
             # follow another user
             target_username = input(helpers.bold_text("\nEnter the username of the user you'd like to follow: "))
@@ -148,7 +184,7 @@ def main():
             break
 
         else:
-            print("Invalid choice. Please try again.")
+            helpers.print_error("\nInvalid choice. Please try again.")
 
         input("\nPress Enter to continue...")
 
