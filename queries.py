@@ -133,21 +133,31 @@ def execute_get_mutuals(currentUsername, friendUsername):
 
 # Follow Another User - A user can follow another user, creating a "FOLLOWS" relationship in Neo4j.
 def follow(tx, currentUsername, targetUsername):
-    query = """ 
+    check_query = """ 
     MATCH (u:User {username: $currentUsername})
     OPTIONAL MATCH (u2:User {username: $targetUsername})
-    WITH u, u2 WHERE u.username <> u2.username
-    MERGE (u)-[:FOLLOWS]->(u2)
-    RETURN u, u2
+    OPTIONAL MATCH (u)-[r:FOLLOWS]->(u2)
+    WITH u, u2, r WHERE u.username <> u2.username
+    RETURN u2, r IS NOT NULL as alreadyFollowed
     """
-    result = tx.run(query, currentUsername=currentUsername, targetUsername=targetUsername)
+    result = tx.run(check_query, currentUsername=currentUsername, targetUsername=targetUsername)
     record = result.single()
-    if record and record["u2"]:
-        return record["u2"]["username"]
-    else:
+    if not record or not record["u2"]:
         return None
+    elif record["alreadyFollowed"]:
+        return "alreadyFollowed"
+    else:
+        follow_query = """
+        MATCH (u:User {username: $currentUsername})
+        OPTIONAL MATCH (u2:User {username: $targetUsername})
+        WITH u, u2 WHERE u.username <> u2.username
+        MERGE (u)-[:FOLLOWS]->(u2)
+        RETURN u, u2
+        """
+        result = tx.run(follow_query, currentUsername=currentUsername, targetUsername=targetUsername)
+        record = result.single()
+        return record["u2"]["username"]
 
-# TODO: What if already following targetUsername?
 def execute_follow(currentUsername, targetUsername):
     try:
         driver = get_driver()
@@ -155,6 +165,8 @@ def execute_follow(currentUsername, targetUsername):
             follow_result = session.execute_write(follow, currentUsername=currentUsername, targetUsername=targetUsername)
             if follow_result is None or len(follow_result) == 0:
                 print_error("The user doesn't exist in the system. Please try again.")
+            elif follow_result == "alreadyFollowed":
+                print_error("You are already following this user.")
             else:
                 print_success(f"You are now following {targetUsername}!")
         driver.close()
