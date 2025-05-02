@@ -110,7 +110,14 @@ def main():
         choice = input("\n" + bold_text("Choose an option (1-10): "))
 
         if choice == "1":
-           pass
+            # View profile information
+            queries.execute_get_profile(curr_user['username'])
+            
+            # Show friend counts
+            profile_choice = input("\nView your followers and following? (y/n): ").lower()
+            if profile_choice == 'y' or profile_choice == 'yes':
+                queries.execute_get_followers(curr_user['username'])
+                queries.execute_get_following(curr_user['username'])
             
         elif choice == "2":
             # edit user profile

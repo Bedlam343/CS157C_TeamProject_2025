@@ -2,6 +2,44 @@ from db_connection import get_driver
 from neo4j import exceptions
 from helpers import blue_text, orange_text, bold_underline, print_error, print_success
 
+# View Profile - A user can view their own profile information
+def get_profile(tx, username):
+    """
+    Handles the query and runs the transaction to return a user's profile information.
+    """
+    query = """MATCH (u:User {username: $username}) 
+        RETURN u"""
+    result = tx.run(query, username=username)
+    record = result.single()
+    return record["u"] if record else None
+
+def execute_get_profile(username):
+    """
+    Manages the DB session, executes the get_profile() query, and stylizes the output.
+    Call this function in other files to display a user's profile information.
+    """
+    try:
+        driver = get_driver()
+        with driver.session() as session:
+            profile = session.execute_read(get_profile, username=username)
+            if profile:
+                print(f"\n{bold_underline('Profile Information:')}") 
+                print(f"{blue_text('Name')}: {profile['name']}")
+                print(f"{blue_text('Username')}: {profile['username']}")
+                print(f"{blue_text('Email')}: {profile['email']}")
+                if 'bio' in profile and profile['bio']:
+                    print(f"{blue_text('Bio')}: {profile['bio']}")
+                if 'location' in profile and profile['location']:
+                    print(f"{blue_text('Location')}: {profile['location']}")
+                return profile
+            else:
+                print_error(f"User with username '{username}' not found.")
+                return None
+        driver.close()
+    except exceptions.Neo4jError as e:
+        print_error(f"Neo4j Error: {e.message}")
+        return None
+
 # View Friends/Connections - A user can see a list of people they are following.
 def get_following(tx, username): 
     """
