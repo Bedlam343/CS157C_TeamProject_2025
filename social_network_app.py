@@ -68,7 +68,7 @@ def show_menu():
     print("\n10. Exit")
 
 def show_edit_user_menu():
-    print(bold_underline("Editing User:"))
+    print(bold_underline("\nEditing User:"))
     print(f"1. Edit Name ({blue_text(curr_user['name'])})")
     print(f"2. Edit Username ({blue_text(curr_user['username'])})")
     print(f"3. Edit Password ({blue_text(curr_user['password'])})")
@@ -122,7 +122,6 @@ def main():
         elif choice == "2":
             # edit user profile
             while True:
-                os.system("cls")
                 show_edit_user_menu()
                 edit_choice = input(f"\n{bold_text('Choose action (1-6): ')}")
 
